@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Play – Echo Arcade</title>
+<meta name="description" content="Play free browser games at Echo Arcade.">
+<style>:root{--bg:#070a14;--panel:#0e1426;--panel2:#141c34;--line:#1f2d52;--cyan:#4de3ff;--gold:#ffd04d;--red:#ff5470;--green:#4dff9a;--pink:#ff7ad9;--text:#d6e6f2;--muted:#8097ab}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55}
+a{color:var(--cyan)}
+.top{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-bottom:1px solid var(--line);background:var(--panel);flex-wrap:wrap;gap:8px}
+.logo{font-weight:800;letter-spacing:4px;color:var(--text);text-decoration:none;font-size:1.25rem}
+.logo span{color:var(--cyan)}
+nav a{margin-left:16px;text-decoration:none;color:var(--muted)}
+nav a:hover{color:var(--cyan)}
+main{max-width:1040px;margin:0 auto;padding:16px}
+footer{text-align:center;color:var(--muted);padding:24px 12px;font-size:.9rem}
+.hero{text-align:center;padding:26px 8px 8px}
+.hero h1{margin:0;font-size:clamp(1.8rem,5vw,2.8rem);letter-spacing:3px}
+.hero h1 span{color:var(--cyan);text-shadow:0 0 18px var(--cyan)}
+.hero p{color:var(--muted);max-width:640px;margin:8px auto}
+.chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+.chip{background:var(--panel);border:1px solid var(--line);color:var(--muted);padding:6px 14px;border-radius:99px;cursor:pointer;font:inherit;font-size:.85rem}
+.chip.on,.chip:hover{color:#001018;background:var(--cyan);border-color:var(--cyan)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin-top:8px}
+.card{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;text-decoration:none;color:var(--text);transition:.15s;position:relative;overflow:hidden}
+.card:hover{transform:translateY(-3px);border-color:var(--cyan);box-shadow:0 6px 28px rgba(77,227,255,.15)}
+.card .em{font-size:2.4rem;line-height:1}
+.card h3{margin:8px 0 2px;font-size:1.05rem}
+.card .meta{font-size:.72rem;color:var(--gold);letter-spacing:1px;text-transform:uppercase}
+.card p{font-size:.88rem;color:var(--muted);margin:6px 0 0;flex:1}
+.card .pl{font-size:.75rem;color:var(--cyan);margin-top:8px}
+.card .new{position:absolute;top:10px;right:10px;background:var(--red);color:#fff;font-size:.65rem;padding:2px 8px;border-radius:99px;font-weight:700}
+.featured{border:1px solid var(--gold);background:linear-gradient(135deg,#1a1630,#0e1426);border-radius:14px;padding:18px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.featured .em{font-size:3rem}
+.featured h2{margin:0}
+.featured p{margin:4px 0;color:var(--muted)}
+.btn{background:var(--panel2);color:var(--cyan);border:1px solid #2a4a7a;border-radius:9px;padding:8px 16px;font:inherit;cursor:pointer;text-decoration:none;display:inline-block}
+.btn:hover:not(:disabled){background:#1c2a4e}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.big{background:var(--cyan);color:#001018;border:0;padding:12px 30px;font-weight:800;letter-spacing:1.5px}
+.btn.big:hover{filter:brightness(1.15)}
+.btn.gold{background:var(--gold);color:#201600;border:0;font-weight:700}
+.adslot{min-height:10px;margin:18px 0;text-align:center}
+.content{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:6px 22px 18px;margin-top:18px}
+.content h2{color:var(--cyan)}
+.content h3{color:var(--gold);margin-bottom:2px}
+.page{max-width:760px;margin:0 auto;padding:20px}
+.page h1{color:var(--cyan)}
+.ptitle{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:6px 0 10px}
+.ptitle h1{margin:0;font-size:1.5rem}
+.tagpill{background:var(--panel2);border:1px solid var(--line);color:var(--gold);font-size:.7rem;padding:3px 10px;border-radius:99px;letter-spacing:1px;text-transform:uppercase}
+.gamebox{position:relative;background:#05070d;border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 0 40px rgba(77,227,255,.1);min-height:200px}
+.gcanvas{display:block;width:100%;height:auto;touch-action:none;background:#05070d}
+.gbar{display:flex;gap:10px 20px;flex-wrap:wrap;justify-content:center;padding:8px 10px;background:var(--panel);font-size:.85rem;color:var(--muted);border-bottom:1px solid var(--line)}
+.gbar b{color:var(--cyan)}
+.ov{position:absolute;inset:0;background:rgba(5,7,13,.9);display:flex;align-items:center;justify-content:center;text-align:center;padding:18px;z-index:5;overflow:auto}
+.ovin{max-width:560px}
+.ovin h2{margin:0 0 6px;color:var(--cyan);letter-spacing:3px}
+.ovin p{margin:6px 0}
+.ovbtns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.cards{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px;background:var(--panel)}
+.cards .btn{min-width:84px;text-align:center;line-height:1.2;font-size:.8rem;padding:8px 6px}
+.cards .btn.sel{border-color:var(--gold);color:var(--gold)}
+.cards .btn .e{font-size:1.5rem;display:block}
+.padrow{display:flex;gap:10px;justify-content:center;padding:10px;background:var(--panel);flex-wrap:wrap}
+.pbtn{width:78px;height:62px;font-size:1.3rem;border-radius:12px;background:var(--panel2);color:var(--cyan);border:1px solid #2a4a7a;cursor:pointer;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+.pbtn:active{background:var(--cyan);color:#001018}
+.pbtn.p2{color:var(--pink);border-color:#7a2a62}
+.pbtn.p2:active{background:var(--pink);color:#001018}
+.dom{padding:16px;max-width:760px;margin:0 auto}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;margin:10px 0}
+/* detective */
+.dtop{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.dots{display:flex;gap:4px;flex-wrap:wrap}
+.dot{width:16px;height:16px;border-radius:50%;background:var(--panel2);border:1px solid var(--line)}
+.dot.ok{background:var(--green)}.dot.bad{background:var(--red)}.dot.now{border-color:var(--gold);box-shadow:0 0 8px var(--gold)}
+.story{font-size:1.05rem;line-height:1.7;font-family:Georgia,serif}
+.story h2{font-family:system-ui;color:var(--gold);margin:0 0 6px}
+.opt{display:block;width:100%;text-align:left;margin:8px 0;padding:12px 14px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;color:var(--text);font:inherit;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--cyan)}
+.opt.right{border-color:var(--green);background:#0d2a1d}
+.opt.wrong{border-color:var(--red);background:#2a0f17}
+.twist{border-left:4px solid var(--pink);padding:8px 14px;background:#1b1230;border-radius:0 10px 10px 0;margin-top:12px}
+.twist b{color:var(--pink);letter-spacing:2px;font-size:.8rem}
+.notebook{font-size:.9rem;color:var(--muted)}
+.notebook li{margin:4px 0}
+/* factory */
+.ftabs{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.ftab{background:var(--panel2);border:1px solid var(--line);color:var(--muted);padding:6px 12px;border-radius:8px;cursor:pointer;font:inherit;font-size:.85rem}
+.ftab.on{border-color:var(--gold);color:var(--gold)}
+.inv{display:flex;flex-wrap:wrap;gap:6px}
+.inv span{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:3px 9px;font-size:.8rem}
+.inv span.zero{opacity:.35}
+.frow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid var(--line)}
+.frow .nm{min-width:150px;font-weight:600}
+.frow .info{color:var(--muted);font-size:.8rem;flex:1;min-width:160px}
+.prog{height:6px;background:var(--panel2);border-radius:4px;overflow:hidden;width:100%}
+.prog i{display:block;height:100%;background:var(--cyan);width:0}
+.small{font-size:.8rem;color:var(--muted)}
+/* cipher */
+.board{display:grid;gap:6px;margin:10px auto;max-width:360px}
+.crow{display:flex;gap:8px;align-items:center;justify-content:center}
+.slot{width:46px;height:46px;border-radius:50%;background:var(--panel2);border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:1.6rem}
+.slot.cur{border-color:var(--cyan)}
+.pegs{display:grid;grid-template-columns:repeat(2,14px);gap:3px;margin-left:8px}
+.peg{width:14px;height:14px;border-radius:50%;background:var(--panel2);border:1px solid var(--line)}
+.peg.b{background:#fff}.peg.w{background:#888}
+.pal{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:10px 0}
+.pal .btn{font-size:1.4rem;padding:6px 12px}
+@media(max-width:560px){.slot{width:40px;height:40px;font-size:1.3rem}.frow .nm{min-width:100%}}
+.demo{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:12px;box-shadow:0 0 40px rgba(77,227,255,.12);margin-top:12px;background:#080c18}
+.demowrap{position:relative}
+.demowrap .btn{position:absolute;left:50%;bottom:14px;transform:translateX(-50%)}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.card .em{display:inline-block;animation:bob 3s ease-in-out infinite}
+.card:nth-child(2n) .em{animation-delay:.6s}.card:nth-child(3n) .em{animation-delay:1.3s}
+.card .go{margin-top:10px;color:#001018;background:var(--cyan);border-radius:8px;text-align:center;font-weight:800;padding:6px;font-size:.85rem}
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6319811906363452" crossorigin="anonymous"></script>
+</head>
+<body class="arcade-play">
+<header class="top">
+  <a class="logo" href="index.html">ECHO<span>ARCADE</span></a>
+  <nav><a href="index.html">All games</a><a href="about.html">About</a><a href="privacy.html">Privacy</a><a href="contact.html">Contact</a>
+  <a href="#" id="mute" style="margin-left:16px">🔊</a></nav>
+</header>
+<main>
+  <div class="ptitle"><span id="pe" style="font-size:2rem"></span><h1 id="pt">Loading…</h1><span class="tagpill" id="ptag"></span><span class="small" id="ppl"></span></div>
+  <div class="gamebox" id="gamebox"></div>
+  <div class="adslot"></div>
+  <section class="content" id="info"></section>
+  <h2 style="margin-top:24px">More games</h2>
+  <section class="grid" id="more"></section>
+</main>
+<footer>
+  <p>© <span id="yr"></span> Echo Arcade • <a href="about.html">About</a> • <a href="privacy.html">Privacy Policy</a> • <a href="contact.html">Contact</a></p>
+</footer>
+<script>window.GAMES = [
+  {
+    id: 'echo-vault', url: 'echo-vault.html', title: 'Echo Vault', emoji: '🔊', tag: 'Stealth', players: '1 player',
+    desc: 'The maze is invisible. Ping with sonar to see the walls, but guards hear every ping.',
+    how: ['Move with arrow keys or WASD.', 'Press Space to send a sonar ping.', 'Collect every shard, then reach the exit.'],
+    tips: ['Move away from your ping spot right after pinging.']
+  },
+  {
+    id: 'bot-arena', file: 'g-shooter.js', title: 'Bot Arena', emoji: '🎯', tag: 'Shooter', players: '1 player vs bots',
+    desc: 'A top-down 2D arena shooter. You against endless waves of smarter and faster bots.',
+    how: ['Move with WASD or arrow keys and aim with the mouse.', 'Hold the mouse button (or Space) to shoot.', 'On a phone, touch and hold: you move toward your finger and auto-aim at the nearest bot.', 'Grab hearts to heal and lightning bolts for rapid fire.'],
+    tips: ['Use the blocks as cover; bots cannot shoot through them.', 'Keep moving sideways. Standing still gets you killed.', 'Each wave heals you a little, so finish waves quickly.']
+  },
+  {
+    id: 'squad-clash', file: 'g-shooter.js', title: 'Squad Clash 4v4', emoji: '🪖', tag: 'Shooter', players: '4 vs 4 (you + 3 bot allies)',
+    desc: 'Team shooter, 4 on 4. You and three bot teammates face four enemy bots. First team to win 3 rounds takes the match.',
+    how: ['Move with WASD or arrow keys and aim with the mouse.', 'Hold the mouse button (or Space) to shoot.', 'A round ends when one whole team is eliminated.', 'Pick Easy, Normal or Hard before the match starts.'],
+    tips: ['Stay close to your teammates so you can focus fire.', 'If you go down, your allies keep fighting for the round.']
+  },
+  {
+    id: 'summon-siege', file: 'g-summoner.js', title: 'Summon Siege', emoji: '🧙', tag: 'Strategy', players: '1 player',
+    desc: 'A 2D summoning battle. Spend mana to call monsters into three lanes and smash the enemy castle.',
+    how: ['Mana refills over time. Click a card (or press 1-5) to summon a creature.', 'Choose a lane by clicking it or with the up/down arrow keys.', 'Lightning (card 6) lets you click anywhere to strike enemies.', 'Destroy the enemy castle to clear the stage. Each stage is harder.'],
+    tips: ['Melee units (Imp, Golem) cannot hit Dragons. Bring Archers or Mages.', 'Golems in front, Archers behind is a classic combo.', 'Do not waste mana; save up for a Dragon when you are safe.']
+  },
+  {
+    id: 'glitch-protocol', file: 'g-glitch.js', title: 'Glitch Protocol', emoji: '🌀', tag: 'Arcade', players: '1 player',
+    desc: 'Every 9 seconds the rules of the game mutate: inverted controls, ice floors, lying colors, darkness, spinning worlds and more.',
+    how: ['Move with WASD or arrows, or hold the mouse/finger to move toward it.', 'Collect green orbs, avoid red orbs.', 'Read the banner. Each glitch changes how everything works.', 'You have 3 lives.'],
+    tips: ['When the banner says COLORS LIE, red orbs are the good ones!', 'In Gravity mode, tap up to flap upward.']
+  },
+  {
+    id: 'daily-cipher', file: 'g-daily.js', title: 'Daily Cipher', emoji: '📅', tag: 'Daily', players: '1 player',
+    desc: 'One secret code per day, the same for everyone. Crack it in 8 tries, build a streak and share your result.',
+    how: ['Pick 4 colors to make a guess, then press Submit.', '⚫ means right color in the right place. ⚪ means right color, wrong place.', 'Colors can repeat in the secret code.', 'A new code unlocks every day at midnight your time.'],
+    tips: ['Use your first guesses to learn which colors exist.', 'Practice mode lets you play extra random codes.']
+  },
+  {
+    id: 'impossible-detective', file: 'g-detective.js', title: 'The Impossible Detective', emoji: '🕵️', tag: 'Story', players: '1 player',
+    desc: 'A 15-chapter murder mystery inside a locked vault. Every chapter ends with a deduction and a twist you will not see coming.',
+    how: ['Read each chapter carefully. The clues are all in the text.', 'Choose the best deduction at the end of every chapter.', 'Wrong answers do not stop the story, but they cost you Insight.', 'In chapter 15 you must name the culprit.'],
+    tips: ['Re-read the notebook (top right) before the final accusation.', 'If something does not fit, it is probably the point.']
+  },
+  {
+    id: 'deep-forge', file: 'g-factory.js', title: 'Deep Forge', emoji: '🏭', tag: 'Factory', players: '1 player',
+    desc: 'A big, tedious, wonderful factory game. Mine five layers deep, smelt ores, craft parts and build the Quantum Engine.',
+    how: ['Click Mine buttons to dig, then buy miners to dig for you.', 'Smelters and fabricators turn ore into ingots and parts automatically.', 'Unlock the next layer by paying its cost. There are 5 layers.', 'Build 3 Quantum Engines to complete the forge. Progress saves automatically.'],
+    tips: ['Coal is needed everywhere. Never let it run out.', 'Buy a machine for each recipe, then scale up the bottleneck.']
+  },
+  {
+    id: 'button-brawl', file: 'g-punch.js', title: 'Button Brawl', emoji: '🥊', tag: 'Fighting', players: '1 vs bot or 2 local',
+    desc: 'Mash different buttons to win. Chain different punches to build a combo, press two keys at once for a Super Punch.',
+    how: ['Player 1 uses A S D F. Player 2 uses J K L ;', 'Each key is a different punch. Alternating keys builds your combo.', 'Pressing the same key twice in a row breaks the combo.', 'Press two keys at the same instant for a 2.5x Super Punch.', 'On a phone, tap the on-screen buttons to fight the bot.'],
+    tips: ['Roll across all four keys instead of spamming one.', 'Hard bots chain Super Punches. Stay on your combo!']
+  },
+  {
+    id: 'pigeon-mail', file: 'g-mini.js', title: 'Pigeon Mail', emoji: '🐦', tag: 'Funny', players: '1 player',
+    desc: 'You are a very confident, very chubby pigeon delivering mail between chimneys.',
+    how: ['Tap, click or press Space to flap.', 'Fly through the gaps between chimneys.', 'Grab envelopes for bonus points.'],
+    tips: ['Small, rhythmic taps beat panic flapping.']
+  },
+  {
+    id: 'toast-tower', file: 'g-mini.js', title: 'Toast Tower', emoji: '🍞', tag: 'Funny', players: '1 player',
+    desc: 'Stack slices of toast into the tallest breakfast skyscraper the world has ever seen.',
+    how: ['A slice slides left and right. Tap, click or press Space to drop it.', 'Only the overlapping part stays. Perfect drops keep your width.', 'How high can you go?'],
+    tips: ['Watch the slice speed up. Drop on the beat.']
+  },
+  {
+    id: 'cat-chaos', file: 'g-mini.js', title: 'Cat Chaos', emoji: '🐱', tag: 'Funny', players: '1 player',
+    desc: 'Knock everything off the shelves. But only when the owner is not looking.',
+    how: ['Click or tap objects to knock them off the shelf.', 'When the owner shows ❗ get ready, when they show 👀 STOP.', 'Get caught 3 times and the game is over. You have 60 seconds.'],
+    tips: ['The warning gives you a short window to sneak in one last swat.']
+  },
+  {
+    id: 'emoji-match', file: 'g-mini.js', title: 'Emoji Mix-Up', emoji: '🧠', tag: 'Puzzle', players: '1 player',
+    desc: 'A memory game full of ridiculous emoji. Match all the pairs in the fewest moves.',
+    how: ['Click two cards to flip them.', 'Matching pairs stay open.', 'Finish with the fewest moves and the best time.'],
+    tips: ['Work in one corner of the board at a time.']
+  },
+  {
+    id: 'chicken-showdown', file: 'g-mini.js', title: 'Chicken Showdown', emoji: '🐔', tag: 'Funny', players: '1 player vs bot',
+    desc: 'A quick-draw duel against Cluck Norris. Wait for DRAW, then fire. Too early and you lose.',
+    how: ['Wait until the screen says DRAW!', 'Then press Space or tap as fast as you can.', 'Fire early and you lose the duel. Each round Cluck gets faster.'],
+    tips: ['Do not anticipate. React.']
+  },
+  {
+    id: 'cow-beam', file: 'g-mini.js', title: 'Cow Beam', emoji: '🛸', tag: 'Funny', players: '1 player',
+    desc: 'Be a UFO. Abduct cows with your tractor beam while angry farmers throw pitchforks.',
+    how: ['Move the UFO with the mouse, finger or arrow keys.', 'Hold click, touch or Space to fire the beam.', 'Keep the beam on a cow until it floats up.', 'The beam uses energy. Dodge pitchforks. You have 3 lives.'],
+    tips: ['Let the beam recharge when farmers are throwing.']
+  }
+];
+</script>
+<script>(function () {
+  'use strict';
+  const A = window.Arcade = {};
+  const qs = new URLSearchParams(location.search);
+  A.gameId = qs.get('g') || '';
+  A.$ = (s, r) => (r || document).querySelector(s);
+  A.el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
+  A.clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  A.rand = (a, b) => a + Math.random() * (b - a);
+  A.pick = arr => arr[(Math.random() * arr.length) | 0];
+
+  A.store = {
+    get(k, d) { try { const v = localStorage.getItem('arc_' + k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+    set(k, v) { try { localStorage.setItem('arc_' + k, JSON.stringify(v)); } catch (e) {} }
+  };
+  A.best = function (id, score, lowerIsBetter) {
+    const k = 'best_' + id, b = A.store.get(k, null);
+    if (b === null || (lowerIsBetter ? score < b : score > b)) { A.store.set(k, score); return { best: score, isNew: true }; }
+    return { best: b, isNew: false };
+  };
+  A.getBest = (id, d) => A.store.get('best_' + id, d);
+
+  A.rng = function (seed) {
+    let a = seed >>> 0;
+    return function () {
+      a = (a + 0x6D2B79F5) | 0;
+      let t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  };
+  A.hash = function (s) {
+    let h = 2166136261;
+    for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
+    return h >>> 0;
+  };
+
+  let ac = null;
+  A.muted = A.store.get('muted', false);
+  A.beep = function (f, d, type, v) {
+    if (A.muted) return;
+    try {
+      ac = ac || new (window.AudioContext || window.webkitAudioContext)();
+      if (ac.state === 'suspended') ac.resume();
+      const o = ac.createOscillator(), g = ac.createGain(), t = ac.currentTime;
+      d = d || 0.1;
+      o.type = type || 'sine';
+      o.frequency.setValueAtTime(f, t);
+      o.frequency.exponentialRampToValueAtTime(Math.max(30, f / 2), t + d);
+      g.gain.setValueAtTime(v || 0.06, t);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + d);
+      o.connect(g); g.connect(ac.destination); o.start(); o.stop(t + d);
+    } catch (e) {}
+  };
+
+  A.keys = {};
+  A.keyHandlers = [];
+  window.addEventListener('keydown', e => {
+    const k = e.key.toLowerCase();
+    const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName);
+    if (!typing && document.body.classList.contains('arcade-play') &&
+        [' ', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright'].includes(k) && e.target.tagName !== 'BUTTON') e.preventDefault();
+    if (!A.keys[k]) A.keyHandlers.forEach(h => h(k, e));
+    A.keys[k] = true;
+  });
+  window.addEventListener('keyup', e => { A.keys[e.key.toLowerCase()] = false; });
+  window.addEventListener('blur', () => { A.keys = {}; });
+  A.onKey = fn => { A.keyHandlers.push(fn); };
+
+  A.canvas = function (box, w, h) {
+    const cv = A.el('canvas', 'gcanvas');
+    cv.width = w; cv.height = h; box.appendChild(cv);
+    const ctx = cv.getContext('2d');
+    const p = { x: w / 2, y: h / 2, down: false, touch: false, clicked: false };
+    const pos = e => { const r = cv.getBoundingClientRect(); p.x = (e.clientX - r.left) * w / r.width; p.y = (e.clientY - r.top) * h / r.height; };
+    cv.addEventListener('pointerdown', e => {
+      pos(e); p.down = true; p.clicked = true; p.touch = e.pointerType === 'touch';
+      try { cv.setPointerCapture(e.pointerId); } catch (_) {}
+    });
+    cv.addEventListener('pointermove', pos);
+    cv.addEventListener('pointerup', () => { p.down = false; });
+    cv.addEventListener('pointercancel', () => { p.down = false; });
+    cv.addEventListener('contextmenu', e => e.preventDefault());
+    return { cv, ctx, p, w, h };
+  };
+
+  A.loop = function (fn) {
+    let last = performance.now(), id, on = true;
+    const f = t => {
+      if (!on) return;
+      const dt = Math.min(0.05, (t - last) / 1000); last = t;
+      fn(dt, t);
+      id = requestAnimationFrame(f);
+    };
+    id = requestAnimationFrame(f);
+    return () => { on = false; cancelAnimationFrame(id); };
+  };
+
+  A.overlay = function (box, html, btns) {
+    const old = box.querySelector('.ov'); if (old) old.remove();
+    const o = A.el('div', 'ov');
+    const inner = A.el('div', 'ovin', html);
+    const row = A.el('div', 'ovbtns');
+    (btns || []).forEach(b => {
+      const x = A.el('button', 'btn big', b.label);
+      x.onclick = () => { o.remove(); b.fn(); };
+      row.appendChild(x);
+    });
+    inner.appendChild(row); o.appendChild(inner); box.appendChild(o);
+    return o;
+  };
+
+  A.games = {};
+  A.reg = function (file, fn) { A.games[file] = fn; };
+  A.run = function (fn) { fn(document.getElementById('gamebox'), A); };
+
+  A.fmt = function (n) {
+    if (n >= 1e9) return (n / 1e9).toFixed(2) + 'B';
+    if (n >= 1e6) return (n / 1e6).toFixed(2) + 'M';
+    if (n >= 1e4) return (n / 1e3).toFixed(1) + 'K';
+    return Math.floor(n).toString();
+  };
+})();
+</script>
+<script>Arcade.reg("g-shooter.js", function (box, A) {
+  const squad = A.gameId === 'squad-clash';
+  const W = 960, H = 600;
+  const bar = A.el('div', 'gbar'); box.appendChild(bar);
+  const C = A.canvas(box, W, H), ctx = C.ctx, P = C.p;
+  const obst = squad
+    ? [[440, 60, 80, 150], [440, 390, 80, 150], [200, 250, 100, 100], [660, 250, 100, 100], [130, 110, 60, 60], [770, 110, 60, 60], [130, 430, 60, 60], [770, 430, 60, 60]]
+    : [[420, 250, 120, 100], [150, 120, 80, 80], [730, 120, 80, 80], [150, 400, 80, 80], [730, 400, 80, 80]];
+  const COL = { b: '#4da3ff', r: '#ff5470' };
+  const clamp = A.clamp;
+
+  let units = [], bullets = [], parts = [], pops = [], pickups = [];
+  let state = 'menu', wave = 0, kills = 0, score = 0, breakT = 0, rapidT = 0;
+  let round = 1, winsB = 0, winsR = 0, roundEnd = 0, roundMsg = '', diff = 1;
+  let stop = null, player = null;
+
+  function mk(team, x, y, o) {
+    return Object.assign({ x, y, r: 14, team, hp: 100, max: 100, ang: team === 'b' ? 0 : Math.PI, cd: Math.random() * .5, sp: 110, flash: 0,
+      strafe: Math.random() < .5 ? 1 : -1, stT: 1, ukick: 0, ukx: 0, uky: 0, chk: .6, cx: x, cy: y, fireCd: .7, dmg: 10, acc: .12, bspd: 430, isP: false }, o || {});
+  }
+  function inObst(x, y, pad) {
+    for (const o of obst) if (x > o[0] - pad && x < o[0] + o[2] + pad && y > o[1] - pad && y < o[1] + o[3] + pad) return true;
+    return false;
+  }
+  function los(a, b) {
+    const dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy), n = Math.ceil(d / 10);
+    for (let i = 1; i < n; i++) if (inObst(a.x + dx * i / n, a.y + dy * i / n, 0)) return false;
+    return true;
+  }
+  function move(u, vx, vy, dt) {
+    u.x = clamp(u.x + vx * dt, u.r, W - u.r);
+    u.y = clamp(u.y + vy * dt, u.r, H - u.r);
+    for (const o of obst) {
+      const cx = clamp(u.x, o[0], o[0] + o[2]), cy = clamp(u.y, o[1], o[1] + o[3]);
+      const dx = u.x - cx, dy = u.y - cy, d = Math.hypot(dx, dy);
+      if (d < u.r) {
+        if (d === 0) { u.y = o[1] - u.r; }
+        else { u.x = cx + dx / d * u.r; u.y = cy + dy / d * u.r; }
+      }
+    }
+  }
+  function separate() {
+    for (let i = 0; i < units.length; i++) for (let j = i + 1; j < units.length; j++) {
+      const a = units[i], b = units[j];
+      if (a.hp <= 0 || b.hp <= 0) continue;
+      const dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy), m = a.r + b.r;
+      if (d > 0 && d < m) { const p = (m - d) / 2; a.x -= dx / d * p; a.y -= dy / d * p; b.x += dx / d * p; b.y += dy / d * p; }
+    }
+  }
+  const angDiff = (a, b) => { let d = a - b; while (d > Math.PI) d -= 2 * Math.PI; while (d < -Math.PI) d += 2 * Math.PI; return d; };
+
+  function fire(u, ang) {
+    const a = ang + (Math.random() - .5) * 2 * u.acc;
+    bullets.push({ x: u.x + Math.cos(ang) * 20, y: u.y + Math.sin(ang) * 20, vx: Math.cos(a) * u.bspd, vy: Math.sin(a) * u.bspd, team: u.team, dmg: u.dmg, life: 1.4, from: u });
+    u.flash = .06;
+    A.beep(u.isP ? 520 : 300, .06, 'square', u.isP ? .04 : .02);
+  }
+  function burst(x, y, col, n) { for (let i = 0; i < n; i++) { const a = Math.random() * 6.28, s = A.rand(40, 200); parts.push({ x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s, life: A.rand(.2, .5), col }); } }
+  function pop(x, y, t, col) { pops.push({ x, y, t, col: col || '#fff', life: .8 }); }
+
+  function enemiesOf(u) { return units.filter(e => e.hp > 0 && e.team !== u.team); }
+  function nearest(u) {
+    let best = null, bd = 1e9;
+    for (const e of enemiesOf(u)) {
+      const d = Math.hypot(e.x - u.x, e.y - u.y) + (los(u, e) ? 0 : 280);
+      if (d < bd) { bd = d; best = e; }
+    }
+    return best;
+  }
+
+  function botAI(b, dt) {
+    const t = nearest(b);
+    if (!t) return;
+    const dx = t.x - b.x, dy = t.y - b.y, dist = Math.hypot(dx, dy), vis = los(b, t);
+    const want = Math.atan2(dy, dx), da = angDiff(want, b.ang), mt = 5 * dt;
+    b.ang += clamp(da, -mt, mt);
+    b.stT -= dt; if (b.stT <= 0) { b.strafe *= -1; b.stT = 1 + Math.random() * 1.5; }
+    const fx = Math.cos(want), fy = Math.sin(want), px = -fy, py = fx;
+    let mx = 0, my = 0, wantMove = true;
+    if (b.ukick > 0) { b.ukick -= dt; mx = b.ukx; my = b.uky; wantMove = false; }
+    else {
+      if (!vis || dist > 300) { mx = fx; my = fy; }
+      else if (dist < 170) { mx = -fx * .8; my = -fy * .8; }
+      if (vis) { mx += px * b.strafe * .7; my += py * b.strafe * .7; }
+    }
+    const l = Math.hypot(mx, my); if (l > 0) { mx /= l; my /= l; }
+    move(b, mx * b.sp, my * b.sp, dt);
+    b.chk -= dt;
+    if (b.chk <= 0) {
+      if (wantMove && l > 0 && Math.hypot(b.x - b.cx, b.y - b.cy) < b.sp * .15) {
+        const a = Math.random() * 6.28; b.ukx = Math.cos(a); b.uky = Math.sin(a); b.ukick = .6;
+      }
+      b.cx = b.x; b.cy = b.y; b.chk = .6;
+    }
+    b.cd -= dt;
+    if (vis && dist < 560 && b.cd <= 0 && Math.abs(da) < .3) { fire(b, b.ang); b.cd = b.fireCd * (.8 + Math.random() * .5); }
+  }
+
+  function playerUpdate(u, dt) {
+    const K = A.keys; let dx = 0, dy = 0;
+    if (K.w || K.arrowup) dy -= 1; if (K.s || K.arrowdown) dy += 1;
+    if (K.a || K.arrowleft) dx -= 1; if (K.d || K.arrowright) dx += 1;
+    let shoot = P.down || K[' '];
+    if (P.touch && P.down) {
+      const ddx = P.x - u.x, ddy = P.y - u.y, d = Math.hypot(ddx, ddy);
+      if (d > 22) { dx = ddx / d; dy = ddy / d; }
+      const t = nearest(u); if (t) u.ang = Math.atan2(t.y - u.y, t.x - u.x);
+      shoot = true;
+    } else if (!P.touch) u.ang = Math.atan2(P.y - u.y, P.x - u.x);
+    const l = Math.hypot(dx, dy);
+    if (l > 0) move(u, dx / l * u.sp, dy / l * u.sp, dt);
+    u.cd -= dt;
+    if (shoot && u.cd <= 0) { fire(u, u.ang); u.cd = rapidT > 0 ? .07 : .15; }
+  }
+
+  function killUnit(u, by) {
+    u.hp = 0; burst(u.x, u.y, COL[u.team], 22); A.beep(160, .25, 'sawtooth', .06);
+    if (!squad && u.team === 'r') {
+      kills++; score += 10;
+      if (Math.random() < .28) pickups.push({ x: u.x, y: u.y, type: Math.random() < .6 ? 'hp' : 'rapid', life: 10 });
+    }
+  }
+
+  function setupArena() {
+    units = []; bullets = []; parts = []; pops = []; pickups = [];
+    player = mk('b', W / 2, H - 60, { isP: true, sp: 190, dmg: 20, bspd: 640, acc: 0.01 });
+    units.push(player);
+    wave = 0; kills = 0; score = 0; rapidT = 0; nextWave();
+  }
+  function nextWave() {
+    wave++; breakT = 0;
+    const n = Math.min(2 + wave, 10);
+    for (let i = 0; i < n; i++) {
+      let x, y, tries = 0;
+      do {
+        const side = Math.random();
+        if (side < .6) { x = A.rand(30, W - 30); y = A.rand(30, 140); }
+        else if (side < .8) { x = A.rand(30, 120); y = A.rand(30, H - 150); }
+        else { x = A.rand(W - 120, W - 30); y = A.rand(30, H - 150); }
+        tries++;
+      } while (inObst(x, y, 20) && tries < 40);
+      units.push(mk('r', x, y, { hp: 40 + wave * 8, max: 40 + wave * 8, sp: Math.min(170, 95 + wave * 5), fireCd: Math.max(.45, 1.05 - wave * .045), acc: Math.max(.05, .2 - wave * .01), dmg: 8 + Math.min(wave, 6) }));
+    }
+    pop(W / 2, 80, 'WAVE ' + wave, '#ffd04d');
+  }
+
+  function setupRound() {
+    units = []; bullets = []; parts = []; pops = []; pickups = [];
+    const dm = [{ acc: .2, fc: 1.0 }, { acc: .12, fc: .7 }, { acc: .07, fc: .5 }][diff];
+    const ys = [150, 250, 350, 450];
+    player = mk('b', 70, 300, { isP: true, sp: 175, dmg: 18, bspd: 620, acc: 0.01 });
+    units.push(player);
+    [150, 450, 300].forEach((y, i) => units.push(mk('b', 70 + (i === 2 ? 40 : 0), y === 300 ? 200 : y, { fireCd: .75, acc: .12, dmg: 10, sp: 105 })));
+    ys.forEach(y => units.push(mk('r', W - 70, y, { fireCd: dm.fc, acc: dm.acc, dmg: 10, sp: 105 + diff * 8 })));
+    roundEnd = 0; roundMsg = '';
+    pop(W / 2, 80, 'ROUND ' + round, '#ffd04d');
+  }
+
+  function startArena() { state = 'play'; setupArena(); }
+  function startSquad(d) { diff = d; round = 1; winsB = 0; winsR = 0; state = 'play'; setupRound(); }
+
+  function update(dt) {
+    if (state !== 'play') return;
+    rapidT = Math.max(0, rapidT - dt);
+    for (const u of units) {
+      if (u.hp <= 0) continue;
+      u.flash = Math.max(0, u.flash - dt);
+      if (u.isP) playerUpdate(u, dt); else botAI(u, dt);
+    }
+    separate();
+    for (let i = bullets.length - 1; i >= 0; i--) {
+      const b = bullets[i]; b.x += b.vx * dt; b.y += b.vy * dt; b.life -= dt;
+      let dead = b.life <= 0 || b.x < 0 || b.x > W || b.y < 0 || b.y > H || inObst(b.x, b.y, 0);
+      if (!dead) for (const u of units) {
+        if (u.hp > 0 && u.team !== b.team && Math.hypot(u.x - b.x, u.y - b.y) < u.r + 3) {
+          u.hp -= b.dmg; burst(b.x, b.y, '#fff', 4); pop(u.x, u.y - 20, '-' + b.dmg, COL[u.team]);
+          if (u.isP) A.beep(120, .12, 'sawtooth', .05);
+          if (u.hp <= 0) killUnit(u, b.from);
+          dead = true; break;
+        }
+      }
+      if (dead) { if (b.life > 0) burst(b.x, b.y, '#9ab', 2); bullets.splice(i, 1); }
+    }
+    for (let i = pickups.length - 1; i >= 0; i--) {
+      const p = pickups[i]; p.life -= dt;
+      if (Math.hypot(p.x - player.x, p.y - player.y) < 26 && player.hp > 0) {
+        if (p.type === 'hp') { player.hp = Math.min(player.max, player.hp + 30); pop(player.x, player.y - 24, '+30 HP', '#4dff9a'); }
+        else { rapidT = 7; pop(player.x, player.y - 24, 'RAPID FIRE!', '#ffd04d'); }
+        A.beep(900, .15, 'sine', .06); pickups.splice(i, 1);
+      } else if (p.life <= 0) pickups.splice(i, 1);
+    }
+    parts.forEach(p => { p.x += p.vx * dt; p.y += p.vy * dt; p.life -= dt; });
+    parts = parts.filter(p => p.life > 0);
+    pops.forEach(p => { p.y -= 30 * dt; p.life -= dt; });
+    pops = pops.filter(p => p.life > 0);
+
+    if (squad) {
+      if (!roundEnd) {
+        const b = units.filter(u => u.team === 'b' && u.hp > 0).length, r = units.filter(u => u.team === 'r' && u.hp > 0).length;
+        if (b === 0 || r === 0) {
+          roundEnd = 2.2;
+          if (r === 0) { winsB++; roundMsg = 'ROUND WON!'; } else { winsR++; roundMsg = 'ROUND LOST'; }
+        }
+      } else {
+        roundEnd -= dt;
+        if (roundEnd <= 0) {
+          if (winsB >= 3 || winsR >= 3) {
+            state = 'end';
+            const won = winsB >= 3;
+            const sc = winsB * 100 + (won ? 100 : 0) + diff * 50;
+            const r = A.best('squad-clash-d' + diff, sc);
+            A.overlay(box, '<h2>' + (won ? 'VICTORY!' : 'DEFEAT') + '</h2><p>Match score ' + winsB + ' – ' + winsR + '</p><p>Best on this difficulty: <b>' + r.best + '</b> points' + (r.isNew ? ' 🏆 new!' : '') + '</p>',
+              [{ label: '↻ REMATCH', fn: menuSquad }]);
+          } else { round++; setupRound(); }
+        }
+      }
+    } else {
+      if (player.hp <= 0 && state === 'play') {
+        state = 'end';
+        const r = A.best('bot-arena', score);
+        A.overlay(box, '<h2>ELIMINATED</h2><p>You reached <b>wave ' + wave + '</b> with <b>' + kills + '</b> kills.</p><p>Score <b>' + score + '</b> • Best <b>' + r.best + '</b>' + (r.isNew ? ' 🏆 new!' : '') + '</p>',
+          [{ label: '↻ TRY AGAIN', fn: startArena }]);
+      } else if (units.filter(u => u.team === 'r' && u.hp > 0).length === 0) {
+        breakT += dt;
+        if (breakT > 2) { score += wave * 50; player.hp = Math.min(player.max, player.hp + 20); nextWave(); }
+      }
+    }
+    // bar
+    if (squad) {
+      const b = units.filter(u => u.team === 'b' && u.hp > 0).length, r = units.filter(u => u.team === 'r' && u.hp > 0).length;
+      bar.innerHTML = '<span>ROUND <b>' + round + '</b></span><span style="color:#4da3ff">BLUE <b>' + b + '</b> alive • wins <b>' + winsB + '</b></span><span style="color:#ff5470">RED <b>' + r + '</b> alive • wins <b>' + winsR + '</b></span><span>HP <b>' + Math.max(0, Math.ceil(player.hp)) + '</b></span>';
+    } else {
+      bar.innerHTML = '<span>WAVE <b>' + wave + '</b></span><span>KILLS <b>' + kills + '</b></span><span>SCORE <b>' + score + '</b></span><span>BEST <b>' + A.getBest('bot-arena', 0) + '</b></span><span>HP <b>' + Math.max(0, Math.ceil(player.hp)) + '</b>' + (rapidT > 0 ? ' ⚡' + rapidT.toFixed(0) : '') + '</span>';
+    }
+  }
+
+  function draw() {
+    ctx.fillStyle = '#080c18'; ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = 'rgba(77,227,255,.05)'; ctx.lineWidth = 1;
+    for (let x = 0; x < W; x += 40) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+    for (let y = 0; y < H; y += 40) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+    if (squad) { ctx.fillStyle = 'rgba(77,163,255,.07)'; ctx.fillRect(0, 0, 110, H); ctx.fillStyle = 'rgba(255,84,112,.07)'; ctx.fillRect(W - 110, 0, 110, H); }
+    for (const o of obst) { ctx.fillStyle = '#16213f'; ctx.fillRect(o[0], o[1], o[2], o[3]); ctx.strokeStyle = '#2f4a85'; ctx.lineWidth = 2; ctx.strokeRect(o[0], o[1], o[2], o[3]); }
+    if (!units) return;
+    for (const p of pickups) {
+      ctx.font = '24px serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.globalAlpha = p.life < 3 ? (Math.sin(p.life * 12) > 0 ? 1 : .3) : 1;
+      ctx.fillText(p.type === 'hp' ? '❤️' : '⚡', p.x, p.y); ctx.globalAlpha = 1;
+    }
+    for (const u of units) {
+      if (u.hp <= 0) { ctx.fillStyle = 'rgba(255,255,255,.05)'; ctx.beginPath(); ctx.arc(u.x, u.y, u.r, 0, 7); ctx.fill(); continue; }
+      ctx.save(); ctx.translate(u.x, u.y); ctx.rotate(u.ang);
+      ctx.fillStyle = '#cfd8e8'; ctx.fillRect(6, -3, 20, 6);
+      if (u.flash > 0) { ctx.fillStyle = '#ffd04d'; ctx.beginPath(); ctx.arc(30, 0, 6, 0, 7); ctx.fill(); }
+      ctx.restore();
+      ctx.fillStyle = COL[u.team]; ctx.beginPath(); ctx.arc(u.x, u.y, u.r, 0, 7); ctx.fill();
+      if (u.isP) { ctx.strokeStyle = '#fff'; ctx.lineWidth = 3; ctx.stroke(); }
+      if (u.hp < u.max) {
+        ctx.fillStyle = '#222'; ctx.fillRect(u.x - 16, u.y - 24, 32, 4);
+        ctx.fillStyle = u.hp / u.max > .4 ? '#4dff9a' : '#ff5470'; ctx.fillRect(u.x - 16, u.y - 24, 32 * Math.max(0, u.hp / u.max), 4);
+      }
+      if (u.isP) { ctx.fillStyle = '#fff'; ctx.font = 'bold 10px system-ui'; ctx.textAlign = 'center'; ctx.fillText('YOU', u.x, u.y - 30); }
+    }
+    for (const b of bullets) { ctx.fillStyle = b.team === 'b' ? '#9fd0ff' : '#ff9aa9'; ctx.beginPath(); ctx.arc(b.x, b.y, 3, 0, 7); ctx.fill(); }
+    for (const p of parts) { ctx.globalAlpha = clamp(p.life * 2.5, 0, 1); ctx.fillStyle = p.col; ctx.fillRect(p.x, p.y, 3, 3); }
+    ctx.globalAlpha = 1;
+    ctx.textAlign = 'center'; ctx.font = 'bold 14px system-ui';
+    for (const p of pops) { ctx.globalAlpha = clamp(p.life * 1.5, 0, 1); ctx.fillStyle = p.col; ctx.fillText(p.t, p.x, p.y); }
+    ctx.globalAlpha = 1;
+    if (squad && roundEnd) { ctx.font = 'bold 44px system-ui'; ctx.fillStyle = '#fff'; ctx.fillText(roundMsg, W / 2, H / 2); }
+    if (!squad && player && player.hp > 0 && units.filter(u => u.team === 'r' && u.hp > 0).length === 0) { ctx.font = 'bold 30px system-ui'; ctx.fillStyle = '#4dff9a'; ctx.fillText('WAVE CLEARED', W / 2, H / 2); }
+    if (state === 'play' && !P.touch) {
+      ctx.strokeStyle = 'rgba(255,255,255,.6)'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(P.x, P.y, 9, 0, 7); ctx.moveTo(P.x - 14, P.y); ctx.lineTo(P.x + 14, P.y); ctx.moveTo(P.x, P.y - 14); ctx.lineTo(P.x, P.y + 14); ctx.stroke();
+    }
+  }
+
+  function menuArena() {
+    state = 'menu'; units = []; player = { x: 0, y: 0, hp: 100, max: 100 };
+    A.overlay(box, '<h2>BOT ARENA</h2><p>Survive wave after wave of bots. Use blocks as cover.<br><b>WASD</b> move • <b>Mouse</b> aim • <b>Click / Space</b> shoot<br>Phone: touch &amp; hold to move and auto-aim.</p>', [{ label: '▶ START', fn: startArena }]);
+  }
+  function menuSquad() {
+    state = 'menu';
+    A.overlay(box, '<h2>SQUAD CLASH 4v4</h2><p>You + 3 bot allies vs 4 enemy bots. First team to win 3 rounds wins.<br><b>WASD</b> move • <b>Mouse</b> aim • <b>Click / Space</b> shoot<br>Phone: touch &amp; hold to move and auto-aim.</p><p>Choose difficulty:</p>',
+      [{ label: 'EASY', fn: () => startSquad(0) }, { label: 'NORMAL', fn: () => startSquad(1) }, { label: 'HARD', fn: () => startSquad(2) }]);
+  }
+
+  stop = A.loop(dt => { update(dt); draw(); });
+  if (squad) menuSquad(); else menuArena();
+});
+
+Arcade.reg("g-summoner.js", function (box, A) {
+  const W = 960, H = 480, LANES = [130, 240, 350], BX = 80, EX = 880;
+  const UN = {
+    imp: { n: 'Imp', e: '👹', c: 2, hp: 34, d: 7, rg: 26, sp: 62, cd: .7 },
+    archer: { n: 'Archer', e: '🏹', c: 3, hp: 26, d: 8, rg: 150, sp: 48, cd: 1 },
+    golem: { n: 'Golem', e: '🗿', c: 5, hp: 190, d: 15, rg: 30, sp: 30, cd: 1.3 },
+    mage: { n: 'Mage', e: '🧙', c: 4, hp: 30, d: 11, rg: 125, sp: 40, cd: 1.5, aoe: 45 },
+    dragon: { n: 'Dragon', e: '🐉', c: 8, hp: 130, d: 22, rg: 60, sp: 75, cd: 1, fly: true }
+  };
+  const ORDER = ['imp', 'archer', 'golem', 'mage', 'dragon'];
+  const bar = A.el('div', 'gbar'); box.appendChild(bar);
+  const C = A.canvas(box, W, H), ctx = C.ctx, P = C.p;
+  const cardsEl = A.el('div', 'cards'); box.appendChild(cardsEl);
+
+  let stage = 1, mana, emana, lane = 1, units, fx, pHp, eHp, eMax, state = 'menu', arm = false, aiT = 0, time = 0;
+  const btns = {};
+  ORDER.forEach((id, i) => {
+    const u = UN[id], b = A.el('button', 'btn', '<span class="e">' + u.e + '</span>' + u.n + '<br>' + u.c + ' mana [' + (i + 1) + ']');
+    b.onclick = () => summon(id, 'p'); cardsEl.appendChild(b); btns[id] = b;
+  });
+  const lb = A.el('button', 'btn', '<span class="e">⚡</span>Lightning<br>3 mana [6]');
+  lb.onclick = () => { arm = !arm; lb.classList.toggle('sel', arm); }; cardsEl.appendChild(lb);
+
+  function reset(keepStage) {
+    if (!keepStage) stage = 1;
+    mana = 5; emana = 3; units = []; fx = []; pHp = 400; eMax = 400 + stage * 70; eHp = eMax; arm = false; aiT = 2; time = 0; lane = 1;
+    lb.classList.remove('sel'); state = 'play';
+  }
+  function summon(id, team, ln) {
+    if (state !== 'play') return;
+    const u = UN[id], l = ln == null ? lane : ln;
+    if (team === 'p') { if (mana < u.c) { A.beep(120, .08, 'square'); return; } mana -= u.c; A.beep(500, .1, 'triangle', .06); }
+    else { if (emana < u.c) return false; emana -= u.c; }
+    const hpm = team === 'e' ? 1 + stage * .06 : 1;
+    units.push({ id, team, lane: l, x: team === 'p' ? BX + 40 : EX - 40, hp: u.hp * hpm, max: u.hp * hpm, t: 0, def: u });
+    return true;
+  }
+  function lightning(x, y) {
+    if (mana < 3) return;
+    mana -= 3; arm = false; lb.classList.remove('sel');
+    fx.push({ k: 'bolt', x, y, life: .3 }); A.beep(900, .25, 'sawtooth', .08);
+    units.forEach(u => { if (u.team === 'e' && Math.hypot(u.x - x, LANES[u.lane] - y) < 90) u.hp -= 45; });
+  }
+  A.onKey(k => {
+    if (state !== 'play') return;
+    if (k >= '1' && k <= '5') summon(ORDER[+k - 1], 'p');
+    if (k === '6') { arm = !arm; lb.classList.toggle('sel', arm); }
+    if (k === 'arrowup' || k === 'w') lane = Math.max(0, lane - 1);
+    if (k === 'arrowdown' || k === 's') lane = Math.min(2, lane + 1);
+  });
+
+  function aiThink() {
+    const avail = ORDER.filter(id => UN[id].c <= emana);
+    if (!avail.length) return;
+    let pool = avail.slice();
+    const flyers = units.filter(u => u.team === 'p' && u.def.fly).length;
+    if (flyers) pool = pool.concat(pool.filter(id => UN[id].rg >= 60), pool.filter(id => UN[id].rg >= 60));
+    if (stage < 3) pool = pool.filter(id => id !== 'dragon');
+    if (!pool.length) return;
+    const id = A.pick(pool);
+    const counts = [0, 1, 2].map(l => units.filter(u => u.team === 'p' && u.lane === l).length);
+    const ln = Math.random() < .55 ? counts.indexOf(Math.max.apply(null, counts)) : (Math.random() * 3) | 0;
+    summon(id, 'e', ln);
+  }
+
+  function update(dt) {
+    if (state !== 'play') return;
+    time += dt;
+    mana = Math.min(10, mana + dt * 1.0);
+    emana = Math.min(10, emana + dt * Math.min(2.2, .75 + stage * .12));
+    aiT -= dt; if (aiT <= 0) { aiThink(); aiT = Math.max(.7, 2.2 - stage * .12) * A.rand(.6, 1.2); }
+    for (const u of units) {
+      const d = u.def, dir = u.team === 'p' ? 1 : -1;
+      let tgt = null, bd = 1e9;
+      for (const o of units) {
+        if (o.team === u.team || o.lane !== u.lane) continue;
+        if (o.def.fly && d.rg < 60) continue;
+        const dist = Math.abs(o.x - u.x);
+        if ((o.x - u.x) * dir > -10 && dist <= d.rg + 14 && dist < bd) { bd = dist; tgt = o; }
+      }
+      u.t -= dt;
+      const castleX = u.team === 'p' ? EX : BX;
+      if (tgt) {
+        if (u.t <= 0) {
+          u.t = d.cd; A.beep(250 + Math.random() * 60, .04, 'square', .02);
+          if (d.aoe) units.forEach(o => { if (o.team !== u.team && Math.hypot(o.x - tgt.x, LANES[o.lane] - LANES[tgt.lane]) < d.aoe) o.hp -= d.d; });
+          else tgt.hp -= d.d;
+          if (d.rg > 60) fx.push({ k: 'shot', x1: u.x, y1: LANES[u.lane] + (d.fly ? -20 : 0), x2: tgt.x, y2: LANES[tgt.lane], life: .15 });
+          else fx.push({ k: 'hit', x: tgt.x, y: LANES[tgt.lane], life: .15 });
+        }
+      } else if (Math.abs(castleX - u.x) <= d.rg + 24) {
+        if (u.t <= 0) {
+          u.t = d.cd; A.beep(180, .05, 'square', .03);
+          if (u.team === 'p') eHp -= d.d; else pHp -= d.d;
+          fx.push({ k: 'hit', x: castleX, y: LANES[u.lane], life: .15 });
+        }
+      } else {
+        let blocked = false;
+        if (!d.fly) for (const o of units) if (o !== u && o.team === u.team && o.lane === u.lane && !o.def.fly && (o.x - u.x) * dir > 0 && Math.abs(o.x - u.x) < 24) { blocked = true; break; }
+        if (!blocked) u.x += dir * d.sp * dt;
+      }
+    }
+    units = units.filter(u => u.hp > 0);
+    fx.forEach(f => f.life -= dt); fx = fx.filter(f => f.life > 0);
+    if (eHp <= 0) {
+      state = 'end'; A.beep(880, .5, 'sine', .1);
+      const r = A.best('summon-siege', stage);
+      A.overlay(box, '<h2>STAGE ' + stage + ' CLEARED</h2><p>The enemy castle crumbles!</p><p>Best stage: <b>' + r.best + '</b></p>', [{ label: 'NEXT STAGE ▶', fn: () => { stage++; reset(true); } }]);
+    } else if (pHp <= 0) {
+      state = 'end';
+      const r = A.best('summon-siege', stage - 1);
+      A.overlay(box, '<h2>CASTLE DESTROYED</h2><p>You fell on stage <b>' + stage + '</b>.</p><p>Best stage cleared: <b>' + Math.max(r.best, 0) + '</b></p>', [{ label: '↻ TRY AGAIN', fn: () => reset(false) }]);
+    }
+    bar.innerHTML = '<span>STAGE <b>' + stage + '</b></span><span>MANA <b>' + mana.toFixed(1) + '</b>/10</span><span>LANE <b>' + (lane + 1) + '</b></span><span>YOUR CASTLE <b>' + Math.max(0, Math.ceil(pHp)) + '</b></span><span>ENEMY CASTLE <b>' + Math.max(0, Math.ceil(eHp)) + '</b></span>';
+    ORDER.forEach(id => { btns[id].disabled = mana < UN[id].c; });
+    lb.disabled = mana < 3;
+  }
+
+  function draw() {
+    ctx.fillStyle = '#0a1224'; ctx.fillRect(0, 0, W, H);
+    LANES.forEach((y, i) => {
+      ctx.fillStyle = i === lane ? 'rgba(255,208,77,.10)' : 'rgba(77,227,255,.04)';
+      ctx.fillRect(0, y - 38, W, 76);
+      ctx.strokeStyle = i === lane ? 'rgba(255,208,77,.5)' : 'rgba(77,227,255,.15)'; ctx.strokeRect(0, y - 38, W, 76);
+    });
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    const castle = (x, hp, mx, col, em) => {
+      ctx.fillStyle = col; ctx.fillRect(x - 28, 60, 56, 360);
+      ctx.font = '40px serif'; ctx.fillText(em, x, 90);
+      ctx.fillStyle = '#222'; ctx.fillRect(x - 34, 44, 68, 8);
+      ctx.fillStyle = '#4dff9a'; ctx.fillRect(x - 34, 44, 68 * Math.max(0, hp / mx), 8);
+    };
+    castle(BX - 40, pHp, 400, 'rgba(77,163,255,.35)', '🏰'); castle(EX + 40, eHp, eMax, 'rgba(255,84,112,.35)', '🏯');
+    if (!units) return;
+    ctx.font = '30px serif';
+    for (const u of units) {
+      const y = LANES[u.lane] + (u.def.fly ? -22 : 0);
+      ctx.fillStyle = 'rgba(0,0,0,.35)'; ctx.beginPath(); ctx.ellipse(u.x, LANES[u.lane] + 18, 15, 5, 0, 0, 7); ctx.fill();
+      ctx.strokeStyle = u.team === 'p' ? '#4da3ff' : '#ff5470'; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(u.x, y, 19, 0, 7); ctx.stroke();
+      ctx.save(); ctx.translate(u.x, y); if (u.team === 'e') ctx.scale(-1, 1); ctx.fillText(u.def.e, 0, 2); ctx.restore();
+      ctx.fillStyle = '#222'; ctx.fillRect(u.x - 16, y - 30, 32, 4);
+      ctx.fillStyle = u.team === 'p' ? '#4dff9a' : '#ff5470'; ctx.fillRect(u.x - 16, y - 30, 32 * Math.max(0, u.hp / u.max), 4);
+    }
+    for (const f of fx) {
+      if (f.k === 'shot') { ctx.strokeStyle = '#ffd04d'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(f.x1, f.y1); ctx.lineTo(f.x2, f.y2); ctx.stroke(); }
+      else if (f.k === 'hit') { ctx.fillStyle = 'rgba(255,255,255,.8)'; ctx.beginPath(); ctx.arc(f.x, f.y, 10, 0, 7); ctx.fill(); }
+      else if (f.k === 'bolt') { ctx.strokeStyle = '#fff'; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(f.x, 0); ctx.lineTo(f.x - 10, f.y / 2); ctx.lineTo(f.x + 8, f.y / 2 + 6); ctx.lineTo(f.x, f.y); ctx.stroke(); ctx.fillStyle = 'rgba(255,255,150,.35)'; ctx.beginPath(); ctx.arc(f.x, f.y, 90, 0, 7); ctx.fill(); }
+    }
+    if (arm) { ctx.font = 'bold 16px system-ui'; ctx.fillStyle = '#ffd04d'; ctx.fillText('LIGHTNING ARMED – click the battlefield', W / 2, 20); }
+  }
+
+  A.loop(dt => {
+    if (P.clicked) {
+      P.clicked = false;
+      if (state === 'play') {
+        if (arm) lightning(P.x, P.y);
+        else { let bi = 0, bd = 1e9; LANES.forEach((y, i) => { const d = Math.abs(P.y - y); if (d < bd) { bd = d; bi = i; } }); lane = bi; }
+      }
+    }
+    update(dt); draw();
+  });
+  A.overlay(box, '<h2>SUMMON SIEGE</h2><p>Spend mana to summon monsters into three lanes and destroy the enemy castle.<br>Click a lane to pick it, click a card (or press 1-5) to summon.<br>⚡ Lightning: arm it, then click anywhere.<br><b>Melee units cannot hit Dragons.</b></p>', [{ label: '▶ START', fn: () => reset(false) }]);
+});
+
+Arcade.reg("g-glitch.js", function (box, A) {
+  const W = 960, H = 600;
+  const bar = A.el('div', 'gbar'); box.appendChild(bar);
+  const C = A.canvas(box, W, H), ctx = C.ctx, P = C.p;
+  const GL = [
+    { id: 'invert', n: 'INVERTED CONTROLS', d: 'Left is right. Up is down. Good luck.' },
+    { id: 'ice', n: 'ICE FLOOR', d: 'You slide. A lot.' },
+    { id: 'swap', n: 'COLORS LIE', d: 'Red orbs are GOOD. Green orbs HURT.' },
+    { id: 'dark', n: 'LIGHTS OUT', d: 'You can only see close to you.' },
+    { id: 'mega', n: 'MEGA YOU', d: 'You are huge and slow.' },
+    { id: 'tiny', n: 'TINY TURBO', d: 'You are tiny and very fast.' },
+    { id: 'spin', n: 'SPINNING WORLD', d: 'The whole world rotates.' },
+    { id: 'slow', n: 'BULLET TIME', d: 'Everything but you is slow.' },
+    { id: 'magnet', n: 'MAGNET MODE', d: 'Every orb is pulled toward you. Every one.' },
+    { id: 'gravity', n: 'GRAVITY', d: 'You fall. Press up or tap above you to flap.' },
+    { id: 'rain', n: 'ORB RAIN', d: 'Red orbs fall from the sky!' }
+  ];
+  let p, orbs, score, lives, state = 'menu', g, gT, spawnT, combo, comboT, inv, bannerT, t0, lastId = '', rot = 0, flashT = 0;
+
+  function start() {
+    p = { x: W / 2, y: H / 2, vx: 0, vy: 0 }; orbs = []; score = 0; lives = 3; combo = 1; comboT = 0; inv = 0; spawnT = 0; t0 = 0;
+    state = 'play'; nextGlitch(true);
+  }
+  function nextGlitch(first) {
+    let n; do { n = A.pick(GL); } while (n.id === lastId);
+    g = first ? { id: 'none', n: 'NORMAL (for now)', d: 'Collect green. Avoid red. The rules WILL change.' } : n;
+    lastId = g.id; gT = 9; bannerT = 3.2; flashT = .4;
+    if (!first) A.beep(200, .4, 'sawtooth', .07);
+    if (g.id === 'rain') for (let i = 0; i < 8; i++) orbs.push({ x: A.rand(30, W - 30), y: -A.rand(0, 300), vx: 0, vy: A.rand(120, 220), good: false, r: 13, life: 20, rain: true });
+  }
+  function spawn() {
+    const good = Math.random() < .6, a = Math.random() * 6.28, s = A.rand(50, 130);
+    let x, y; do { x = A.rand(30, W - 30); y = A.rand(30, H - 30); } while (Math.hypot(x - p.x, y - p.y) < 160);
+    orbs.push({ x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s, good, r: 12, life: 14 });
+  }
+  function rad() { return g.id === 'mega' ? 34 : g.id === 'tiny' ? 7 : 16; }
+  function hurt() {
+    if (inv > 0) return;
+    lives--; inv = 1.2; combo = 1; A.beep(110, .3, 'sawtooth', .1); flashT = .3;
+    if (lives <= 0) {
+      state = 'end';
+      const r = A.best('glitch-protocol', score);
+      A.overlay(box, '<h2>SYSTEM CRASH</h2><p>Score <b>' + score + '</b> • Best <b>' + r.best + '</b>' + (r.isNew ? ' 🏆 new!' : '') + '</p>', [{ label: '↻ REBOOT', fn: start }]);
+    }
+  }
+
+  function update(dt) {
+    if (state !== 'play') return;
+    t0 += dt; inv = Math.max(0, inv - dt); bannerT = Math.max(0, bannerT - dt); flashT = Math.max(0, flashT - dt);
+    gT -= dt; if (gT <= 0) nextGlitch(false);
+    comboT -= dt; if (comboT <= 0) combo = 1;
+    rot = g.id === 'spin' ? rot + dt * .7 : rot * .9;
+    const K = A.keys; let ix = 0, iy = 0;
+    if (K.a || K.arrowleft) ix -= 1; if (K.d || K.arrowright) ix += 1;
+    if (K.w || K.arrowup) iy -= 1; if (K.s || K.arrowdown) iy += 1;
+    if (P.down) {
+      let px = P.x, py = P.y;
+      if (g.id === 'spin') { const c = Math.cos(rot), s = Math.sin(rot), dx = P.x - W / 2, dy = P.y - H / 2; px = W / 2 + dx * c + dy * s; py = H / 2 - dx * s + dy * c; }
+      const dx = px - p.x, dy = py - p.y, d = Math.hypot(dx, dy);
+      if (d > 12) { ix = dx / d; iy = dy / d; }
+    }
+    if (g.id === 'invert') { ix = -ix; iy = -iy; }
+    let sp = 260; if (g.id === 'mega') sp = 150; if (g.id === 'tiny') sp = 420;
+    const l = Math.hypot(ix, iy) || 1;
+    let tx = ix / l * sp * (ix || iy ? 1 : 0), ty = iy / l * sp * (ix || iy ? 1 : 0);
+    if (g.id === 'gravity') {
+      p.vy += 760 * dt;
+      p.vx += (tx - p.vx) * Math.min(1, dt * 12);
+      if (iy < 0 || (P.down && P.y < p.y - 20)) p.vy -= 1700 * dt;
+    } else if (g.id === 'ice') { p.vx += (tx - p.vx) * Math.min(1, dt * 1.3); p.vy += (ty - p.vy) * Math.min(1, dt * 1.3); }
+    else { p.vx += (tx - p.vx) * Math.min(1, dt * 14); p.vy += (ty - p.vy) * Math.min(1, dt * 14); }
+    p.x += p.vx * dt; p.y += p.vy * dt;
+    const R = rad();
+    if (p.x < R) { p.x = R; p.vx = Math.abs(p.vx) * .4; } if (p.x > W - R) { p.x = W - R; p.vx = -Math.abs(p.vx) * .4; }
+    if (p.y < R) { p.y = R; p.vy = Math.abs(p.vy) * .3; } if (p.y > H - R) { p.y = H - R; p.vy = g.id === 'gravity' ? 0 : -Math.abs(p.vy) * .4; }
+
+    spawnT -= dt; if (spawnT <= 0 && orbs.length < 20) { spawn(); spawnT = .75; }
+    if (g.id === 'rain' && Math.random() < dt * 3) orbs.push({ x: A.rand(30, W - 30), y: -10, vx: 0, vy: A.rand(120, 240), good: false, r: 13, life: 10, rain: true });
+    const ts = g.id === 'slow' ? .35 : 1;
+    for (let i = orbs.length - 1; i >= 0; i--) {
+      const o = orbs[i]; o.life -= dt;
+      if (g.id === 'magnet') { const dx = p.x - o.x, dy = p.y - o.y, d = Math.hypot(dx, dy) || 1; o.vx += dx / d * 260 * dt; o.vy += dy / d * 260 * dt; const sp2 = Math.hypot(o.vx, o.vy); if (sp2 > 200) { o.vx *= 200 / sp2; o.vy *= 200 / sp2; } }
+      o.x += o.vx * dt * ts; o.y += o.vy * dt * ts;
+      if (!o.rain) { if (o.x < o.r || o.x > W - o.r) o.vx *= -1; if (o.y < o.r || o.y > H - o.r) o.vy *= -1; }
+      let remove = o.life <= 0 || (o.rain && o.y > H + 30);
+      if (!remove && Math.hypot(o.x - p.x, o.y - p.y) < o.r + R) {
+        const lies = g.id === 'swap', beneficial = lies ? !o.good : o.good;
+        if (beneficial) { score += 10 * combo; combo = Math.min(6, combo + 1); comboT = 1.4; A.beep(700 + combo * 80, .1, 'triangle', .06); }
+        else hurt();
+        remove = true;
+      }
+      if (remove) orbs.splice(i, 1);
+    }
+    bar.innerHTML = '<span>SCORE <b>' + score + '</b></span><span>LIVES <b>' + '❤'.repeat(Math.max(0, lives)) + '</b></span><span>COMBO <b>x' + combo + '</b></span><span>BEST <b>' + A.getBest('glitch-protocol', 0) + '</b></span><span>NEXT GLITCH <b>' + Math.ceil(gT) + 's</b></span>';
+  }
+
+  function draw() {
+    ctx.save();
+    ctx.fillStyle = '#070a14'; ctx.fillRect(0, 0, W, H);
+    if (!p) { ctx.restore(); return; }
+    ctx.translate(W / 2, H / 2); ctx.rotate(rot); ctx.translate(-W / 2, -H / 2);
+    ctx.strokeStyle = g.id === 'ice' ? 'rgba(160,230,255,.25)' : 'rgba(77,227,255,.07)'; ctx.lineWidth = 1;
+    for (let x = -W; x < 2 * W; x += 48) { ctx.beginPath(); ctx.moveTo(x, -H); ctx.lineTo(x, 2 * H); ctx.stroke(); }
+    for (let y = -H; y < 2 * H; y += 48) { ctx.beginPath(); ctx.moveTo(-W, y); ctx.lineTo(2 * W, y); ctx.stroke(); }
+    ctx.strokeStyle = '#2a4a7a'; ctx.lineWidth = 3; ctx.strokeRect(0, 0, W, H);
+    for (const o of orbs) {
+      ctx.fillStyle = o.good ? '#4dff9a' : '#ff5470'; ctx.shadowColor = ctx.fillStyle; ctx.shadowBlur = 12;
+      ctx.beginPath(); ctx.arc(o.x, o.y, o.r, 0, 7); ctx.fill();
+    }
+    ctx.shadowBlur = 0;
+    const R = rad();
+    ctx.globalAlpha = inv > 0 && Math.floor(inv * 10) % 2 ? .35 : 1;
+    ctx.fillStyle = '#fff'; ctx.shadowColor = '#fff'; ctx.shadowBlur = 16; ctx.beginPath(); ctx.arc(p.x, p.y, R, 0, 7); ctx.fill();
+    ctx.shadowBlur = 0; ctx.globalAlpha = 1;
+    ctx.restore();
+    if (g.id === 'dark' && state === 'play') {
+      const gr = ctx.createRadialGradient(p.x, p.y, 40, p.x, p.y, 170);
+      gr.addColorStop(0, 'rgba(0,0,0,0)'); gr.addColorStop(1, 'rgba(0,0,0,.985)');
+      ctx.fillStyle = gr; ctx.fillRect(0, 0, W, H);
+    }
+    if (flashT > 0) { ctx.fillStyle = 'rgba(255,255,255,' + flashT * .5 + ')'; ctx.fillRect(0, 0, W, H); }
+    ctx.fillStyle = '#12304a'; ctx.fillRect(0, 0, W, 5);
+    ctx.fillStyle = '#ffd04d'; ctx.fillRect(0, 0, W * Math.max(0, gT / 9), 5);
+    if (bannerT > 0 && state === 'play') {
+      ctx.globalAlpha = Math.min(1, bannerT); ctx.textAlign = 'center';
+      ctx.font = 'bold 40px system-ui'; ctx.fillStyle = '#ff7ad9'; ctx.fillText(g.n, W / 2, 70);
+      ctx.font = '20px system-ui'; ctx.fillStyle = '#fff'; ctx.fillText(g.d, W / 2, 102);
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  A.loop(dt => { update(dt); draw(); });
+  A.overlay(box, '<h2>GLITCH PROTOCOL</h2><p>Collect <b style="color:#4dff9a">green</b> orbs, dodge <b style="color:#ff5470">red</b> orbs.<br>But every 9 seconds the rules mutate: inverted controls, ice, lying colors, darkness, spinning worlds…<br><b>WASD / arrows</b> or hold mouse/finger to move.</p>', [{ label: '▶ START', fn: start }]);
+});
+
+Arcade.reg("g-daily.js", function (box, A) {
+  const SYM = ['🔴', '🟠', '🟡', '🟢', '🔵', '🟣'], LEN = 4, MAX = 8;
+  const dkey = d => d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+  const now = new Date(), today = dkey(now);
+  const yest = new Date(now); yest.setDate(yest.getDate() - 1);
+  const yKey = dkey(yest);
+  let practice = false, code, guesses, cur, done, won;
+  const wrap = A.el('div', 'dom'); box.appendChild(wrap);
+
+  function makeCode(seed) { const r = A.rng(A.hash(seed)); return Array.from({ length: LEN }, () => Math.floor(r() * SYM.length)); }
+  function score(g, c) {
+    let b = 0, w = 0; const cc = {}, gc = {};
+    for (let i = 0; i < LEN; i++) { if (g[i] === c[i]) b++; else { cc[c[i]] = (cc[c[i]] || 0) + 1; gc[g[i]] = (gc[g[i]] || 0) + 1; } }
+    for (const k in gc) w += Math.min(gc[k], cc[k] || 0);
+    return { b, w };
+  }
+  function stats() { return A.store.get('cipher_stats', { played: 0, won: 0, streak: 0, max: 0, lastWin: '', dist: [0, 0, 0, 0, 0, 0, 0, 0] }); }
+
+  function load() {
+    practice = false; code = makeCode('echo-cipher-' + today);
+    const s = A.store.get('cipher_day_' + today, null);
+    guesses = s ? s.guesses : []; done = s ? s.done : false; won = s ? s.won : false; cur = [];
+  }
+  function newPractice() {
+    practice = true; code = Array.from({ length: LEN }, () => Math.floor(Math.random() * SYM.length));
+    guesses = []; cur = []; done = false; won = false; render();
+  }
+  function save() { if (!practice) A.store.set('cipher_day_' + today, { guesses, done, won }); }
+
+  function finish() {
+    done = true;
+    if (!practice) {
+      const s = stats(); s.played++;
+      if (won) { s.won++; s.streak = (s.lastWin === yKey) ? s.streak + 1 : 1; s.lastWin = today; s.max = Math.max(s.max, s.streak); s.dist[guesses.length - 1]++; }
+      else s.streak = 0;
+      A.store.set('cipher_stats', s);
+    }
+    save();
+  }
+  function submit() {
+    if (cur.length !== LEN || done) return;
+    guesses.push(cur.slice()); cur = [];
+    const sc = score(guesses[guesses.length - 1], code);
+    A.beep(400 + sc.b * 150, .15, 'triangle', .06);
+    if (sc.b === LEN) { won = true; finish(); } else if (guesses.length >= MAX) { finish(); }
+    else save();
+    render();
+  }
+  function shareText() {
+    let t = 'Echo Cipher ' + today + ' ' + (won ? guesses.length : 'X') + '/' + MAX + '\n';
+    guesses.forEach(g => { const s = score(g, code); t += '⚫'.repeat(s.b) + '⚪'.repeat(s.w) + '▫️'.repeat(LEN - s.b - s.w) + '\n'; });
+    return t + location.origin + location.pathname.replace('play.html', '');
+  }
+  function countdown() {
+    const n = new Date(), nx = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1), s = Math.floor((nx - n) / 1000);
+    const p = v => String(v).padStart(2, '0');
+    return p(Math.floor(s / 3600)) + ':' + p(Math.floor(s % 3600 / 60)) + ':' + p(s % 60);
+  }
+
+  function render() {
+    const st = stats();
+    let h = '<div class="panel" style="text-align:center"><b>' + (practice ? 'PRACTICE MODE' : 'DAILY CIPHER • ' + today) + '</b><br><span class="small">Crack the 4-color code in ' + MAX + ' tries. ⚫ right color &amp; place • ⚪ right color, wrong place. Colors can repeat.</span><br><span class="small">🔥 Streak <b>' + st.streak + '</b> • Best <b>' + st.max + '</b> • Played <b>' + st.played + '</b> • Won <b>' + st.won + '</b></span></div>';
+    h += '<div class="board">';
+    for (let r = 0; r < MAX; r++) {
+      h += '<div class="crow">';
+      const g = guesses[r];
+      for (let i = 0; i < LEN; i++) {
+        const isCur = r === guesses.length && !done;
+        const v = g ? g[i] : (isCur ? cur[i] : undefined);
+        h += '<div class="slot' + (isCur && i === cur.length ? ' cur' : '') + '">' + (v !== undefined ? SYM[v] : '') + '</div>';
+      }
+      h += '<div class="pegs">';
+      const sc = g ? score(g, code) : null;
+      for (let i = 0; i < LEN; i++) h += '<div class="peg' + (sc ? (i < sc.b ? ' b' : i < sc.b + sc.w ? ' w' : '') : '') + '"></div>';
+      h += '</div></div>';
+    }
+    h += '</div>';
+    if (!done) {
+      h += '<div class="pal">' + SYM.map((s, i) => '<button class="btn" data-c="' + i + '">' + s + '</button>').join('') + '</div>';
+      h += '<div class="pal"><button class="btn" id="del">⌫ Delete</button><button class="btn gold" id="sub"' + (cur.length === LEN ? '' : ' disabled') + '>Submit</button></div>';
+    } else {
+      h += '<div class="panel" style="text-align:center"><h2 style="margin:0">' + (won ? '🎉 Cracked in ' + guesses.length + '!' : '💥 Not this time') + '</h2>';
+      if (!won) h += '<p>The code was: <span style="font-size:1.6rem">' + code.map(i => SYM[i]).join(' ') + '</span></p>';
+      if (!practice) h += '<p>Next daily cipher in <b id="cd">' + countdown() + '</b></p><button class="btn gold" id="share">📋 Copy result</button> ';
+      h += '<button class="btn" id="prac">Play a practice code</button>' + (practice ? ' <button class="btn" id="back">Back to daily</button>' : '') + '</div>';
+    }
+    wrap.innerHTML = h;
+    wrap.querySelectorAll('[data-c]').forEach(b => b.onclick = () => { if (cur.length < LEN) { cur.push(+b.dataset.c); A.beep(500, .05); render(); } });
+    const del = wrap.querySelector('#del'); if (del) del.onclick = () => { cur.pop(); render(); };
+    const sub = wrap.querySelector('#sub'); if (sub) sub.onclick = submit;
+    const sh = wrap.querySelector('#share'); if (sh) sh.onclick = () => {
+      const t = shareText();
+      if (navigator.clipboard) navigator.clipboard.writeText(t).then(() => { sh.textContent = '✅ Copied!'; }, () => prompt('Copy your result:', t)); else prompt('Copy your result:', t);
+    };
+    const pr = wrap.querySelector('#prac'); if (pr) pr.onclick = newPractice;
+    const bk = wrap.querySelector('#back'); if (bk) bk.onclick = () => { load(); render(); };
+  }
+  A.onKey(k => {
+    if (done) return;
+    if (k >= '1' && k <= '6' && cur.length < LEN) { cur.push(+k - 1); render(); }
+    else if (k === 'backspace') { cur.pop(); render(); }
+    else if (k === 'enter') submit();
+  });
+  setInterval(() => { const c = document.getElementById('cd'); if (c) c.textContent = countdown(); }, 1000);
+  load(); render();
+});
+
+Arcade.reg("g-detective.js", function (box, A) {
+  const CH = [
+    {
+      t: 'The Locked Vault',
+      s: 'A storm batters Hollowmere Manor, a lonely estate on a clifftop. At 9:52 p.m. you, Detective Iris Vale, are led to a steel vault door, bolted from the inside. The guards cut through it with a torch. Inside sits billionaire inventor Elias Thorne, slumped at his desk, a pistol by his hand, one gunshot wound to the temple. The wall clock stopped at 9:47. Everyone swears that is when the shot was fired. But the blood on the desk is dark and crusted at the edges.',
+      q: 'The shot was supposedly fired only five minutes ago. What does not fit?',
+      o: ['The storm is too loud for anyone to have heard a shot', 'The blood is already dry, so it was spilled long before 9:47', 'The pistol is an unusual calibre'], a: 1,
+      r: 'Fresh blood stays wet for a long time. Whatever happened to this man happened well before the "shot" everyone heard.',
+      tw: 'The man was already dead before the gunshot that "killed" him.',
+      clue: 'Blood is dry. He died long before 9:47.'
+    },
+    {
+      t: 'The Butler\'s Ears',
+      s: 'Gideon Pike, the butler for thirty years, says he heard the shot from the corridor and raised the alarm at once. But you study the vault: a plate on the door reads "ACOUSTICALLY SEALED – NO SOUND PASSES". Beside the door hangs an intercom panel. Its small "PLAY" light is still glowing faintly.',
+      q: 'Pike heard a shot through a soundproof vault. What is the most likely explanation?',
+      o: ['Pike is the murderer and is bluffing', 'The sound did not come from inside the vault. It was played through the intercom', 'The soundproofing failed because of the storm'], a: 1,
+      r: 'The intercom has a playback input. Behind the panel you find a tiny recorder. The "gunshot" was a recording.',
+      tw: 'The gunshot was never fired at 9:47. It was a recording on a timer.',
+      clue: 'The shot was a recording played over the intercom.'
+    },
+    {
+      t: 'A Perfect Alibi',
+      s: 'Marcus Thorne, the nephew and heir, is drowning in gambling debts. He swears he was on the terrace phoning creditors from 9:46 to 9:50, and the creditors confirm it. He looks relieved, even smug. "I could not have done it. I was on the phone at 9:47."',
+      q: 'Does Marcus\'s alibi clear him of staging the 9:47 gunshot?',
+      o: ['Yes. He was on the phone at that exact time', 'No. A timed recording needs no one present, so alibis for 9:47 prove nothing', 'Yes, as long as the creditors are honest'], a: 1,
+      r: 'Timers do not need hands. Whoever set this up was long gone before 9:47, so alibis for that minute are worthless.',
+      tw: 'Everyone\'s alibi for 9:47 is meaningless. The real crime happened earlier.',
+      clue: 'Alibis for 9:47 prove nothing. The staging was done earlier.'
+    },
+    {
+      t: 'The Uninvited Guest',
+      s: 'In the wine cellar you find journalist Lena Ward, hiding with a recorder. She is not a gatecrasher: she got an anonymous note promising "the story of the decade, midnight at Hollowmere". Her recording of the dinner catches Elias Thorne saying, "Tonight, one of you stops pretending."',
+      q: 'Why would the person behind all this invite a journalist to the manor?',
+      o: ['To confess to her', 'To have a credible outside witness for a staged murder', 'By accident, the note was meant for someone else'], a: 1,
+      r: 'Nothing about tonight is accidental. A journalist and a famous detective make perfect witnesses.',
+      tw: 'The entire evening is a performance, and it needed an audience.',
+      clue: 'Lena and I were both invited. The night is a staged performance.'
+    },
+    {
+      t: 'The Doctor\'s Bag',
+      s: 'Dr. Anya Rao, the family physician, says Elias had a perfectly healthy heart. But when she opens her medical bag, a bottle of heart pills rolls out. The label says "V. Thorne". She goes pale when you pick it up.',
+      q: 'Who is "V. Thorne"?',
+      o: ['A typo for Elias', 'Another Thorne that nobody has mentioned', 'A random patient with the same surname'], a: 1,
+      r: 'Dr. Rao breaks down. Victor Thorne, Elias\'s identical twin, was declared dead twenty years ago. In truth he lived secretly in the east wing.',
+      tw: 'Elias had an identical twin who was officially dead for twenty years.',
+      clue: 'Victor Thorne, Elias\'s twin, lived in secret. Heart patient.'
+    },
+    {
+      t: 'Left Hand, Right Hand',
+      s: 'Dr. Rao whispers one detail: "The twins were identical in everything but one thing. Elias was right-handed. Victor was left-handed." Lena\'s photos show Elias signing the dinner menu with his right hand. You return to the vault. The pistol lies beside the dead man\'s left hand, and the grip is wiped clean.',
+      q: 'What does the gun on the left side tell you?',
+      o: ['Elias was ambidextrous', 'The dead man is Victor, dressed as Elias', 'Pike moved the gun after the shot'], a: 1,
+      r: 'The body is not Elias. Victor wears his brother\'s clothes and ring, and the wounded face made identification easy to fake.',
+      tw: 'The dead man in the vault is Victor. Elias was alive at dinner, and now he is missing.',
+      clue: 'The body is Victor, not Elias. Elias is missing.'
+    },
+    {
+      t: 'Ghost in the Machine',
+      s: 'Celeste Moreau, Elias\'s business partner, confesses that she and Marcus planned to sell Elias\'s secret "Project Lantern" to an arms company. She is shaking. "Tonight at 10:20 an email from Elias\'s account cancelled the sale. Elias is dead. How is that possible?" You check the server log: the email was sent from inside the manor.',
+      q: 'Who sent an email from a "dead" man\'s account at 10:20?',
+      o: ['It is a glitch caused by the storm', 'Elias himself, alive and still inside the manor', 'The police, using his password'], a: 1,
+      r: 'The sender is on the manor network, half an hour after the body was found. Elias is alive and still here.',
+      tw: 'Elias is alive, on the estate, and furious about Project Lantern.',
+      clue: 'Elias emailed at 10:20. He is still inside the manor.'
+    },
+    {
+      t: 'The Passage Behind the Books',
+      s: 'Celeste\'s old blueprints show a servants\' passage behind the vault bookshelf, leading down to the boathouse. You find it. Inside: wet footprints (the same ones from the vault), a half-eaten sandwich, a damp coat, and the recorder\'s twin, rigged to a timer. The passage door has a lock. Only one key hangs on a ring in the hall. It belongs to Pike.',
+      q: 'What does it mean that only Pike holds the key to the passage?',
+      o: ['Pike is the mastermind', 'Pike knew about the passage and helped. He lied about the night', 'Marcus copied the key'], a: 1,
+      r: 'A butler of thirty years does not lose his only key by accident. Pike has been lying to you since the start.',
+      tw: 'Pike has been lying to you from the first minute.',
+      clue: 'Only Pike had the passage key. He is an accomplice.'
+    },
+    {
+      t: 'The Butler Breaks',
+      s: 'Pike finally breaks. He tended Victor secretly for twenty years. At 8:20 tonight he found Victor dead in the east wing, and "Master Elias" told him it was natural and begged him to help move the body. Pike never knew the rest. He hands you Victor\'s heart medicine. You open the bottle: the pills are chalky, sweet. Pure sugar.',
+      q: 'Victor\'s heart pills are sugar pills. What does that mean?',
+      o: ['The pharmacy made a mistake', 'Someone swapped his medicine, so Victor was murdered, with a plan days old', 'Victor refused to take his medicine'], a: 1,
+      r: 'Victor needed those pills to live. Someone replaced them days ago. The gun was only decoration.',
+      tw: 'It was a slow, silent murder, planned days ago. The gunshot hid it.',
+      clue: 'Victor\'s pills were swapped for sugar. Premeditated murder.'
+    },
+    {
+      t: 'Framed',
+      s: 'The pistol carries Celeste\'s fingerprints. Under the desk lies a cufflink engraved "M.T." Everything is arranged to point at Celeste and Marcus, the two who tried to sell Project Lantern behind Elias\'s back. Both are now white with fear.',
+      q: 'Evidence points neatly at Celeste and Marcus. Who benefits most if they go to prison?',
+      o: ['Dr. Rao', 'Elias, who wants revenge and wants Lantern protected', 'Lena Ward, who gets her story'], a: 1,
+      r: 'Perfect evidence is suspicious evidence. The scene was built to convict the two people who betrayed him.',
+      tw: 'The whole scene was constructed to convict the people who betrayed Elias.',
+      clue: 'Fingerprints and cufflink were planted to frame Celeste and Marcus.'
+    },
+    {
+      t: 'Why You?',
+      s: 'You take out the letter that summoned you here: "A concerned friend asks you to attend Hollowmere tonight." You compare the looping handwriting with Elias\'s signature on the Lantern documents. The loops match exactly.',
+      q: 'Why would Elias pick you, Detective Vale, specifically?',
+      o: ['You were the only detective within driving distance', 'Your reputation: if you call it murder, nobody will question it', 'He secretly wanted to be arrested'], a: 1,
+      r: 'You have never been wrong in public. Your verdict is the stamp that turns a staged scene into an official murder.',
+      tw: 'You were never the investigator in this plan. You were the stamp of approval.',
+      clue: 'The summoning letter is in Elias\'s handwriting. I was used.'
+    },
+    {
+      t: 'The Boathouse',
+      s: 'Down at the boathouse, the motorboat\'s engine is still warm and the tank freshly filled. The storm is easing. Up on the cliff, the old lighthouse blinks a pattern. You decode it from the rhythm: dot-dot, dash-dash... "MIDNIGHT".',
+      q: 'What is the lighthouse signal and the warm engine telling you?',
+      o: ['Elias plans to escape by boat at midnight and is signalling a pickup', 'The lighthouse lamp is simply broken', 'Marcus is signalling his creditors'], a: 0,
+      r: 'A warm engine, a fuelled tank, and a midnight signal: Elias plans to vanish with the storm\'s end.',
+      tw: 'Elias intends to disappear at midnight. You have until then.',
+      clue: 'Boat engine warm. Lighthouse signal says MIDNIGHT.'
+    },
+    {
+      t: 'The Trap',
+      s: 'It is 11:40 p.m. Elias will need a second person to bring the boat around. You can storm the lighthouse with every guard, wait for a police boat that cannot cross the storm, or use Pike\'s radio to send an "all clear" and let whoever comes lead you to Elias.',
+      q: 'How do you catch Elias and his accomplice together?',
+      o: ['Storm the lighthouse with every guard', 'Use Pike\'s radio to send "all clear" and let the accomplice lead you to Elias', 'Wait for a police boat that cannot arrive in the storm'], a: 1,
+      r: 'A raid would warn Elias. A quiet "all clear" brings his helper straight to you.',
+      tw: 'A small boat docks. The cloaked figure who steps out is not Elias. It is Dr. Rao.',
+      clue: 'The accomplice who came for him was Dr. Rao.'
+    },
+    {
+      t: 'The Second Accomplice',
+      s: 'Dr. Rao confesses on the dock. Twenty years ago she forged Victor\'s death certificate for Elias. Tonight she was to ferry him away. But when you mention the sugar pills, she turns pale. "I only ever wrote real prescriptions! I did not know he would... Victor was my patient." Her hands shake as she points up at the lighthouse.',
+      q: 'What does her reaction to the sugar pills tell you?',
+      o: ['She is faking it to warn Elias', 'She did not know Elias was a murderer, and now she is a witness against him', 'She is the true killer'], a: 1,
+      r: 'Her horror is real. She helped with a lie, not a murder. She agrees to lead you to the lighthouse lamp room.',
+      tw: 'Even his own accomplice never knew he would kill his brother.',
+      clue: 'Rao did not know about the poisoning. She will testify.'
+    },
+    {
+      t: 'Final Accusation',
+      s: 'In the lamp room, Elias Thorne sits calmly, his coat dry, a suitcase beside him, the great lamp turning above. "You are even better than I hoped, Detective," he says. The storm breaks, and for the first time all night the sea is silent. Everyone is waiting for your word.',
+      q: 'Who is responsible for the death of the man in the vault?',
+      o: ['Celeste Moreau', 'Marcus Thorne', 'Gideon Pike', 'Elias Thorne: alive, he swapped Victor\'s medicine, staged the shooting and framed his betrayers', 'Dr. Anya Rao'], a: 3,
+      r: 'Elias murdered his own twin with a quiet swap of pills, staged a gunshot, planted evidence, summoned you and a journalist as witnesses, and planned to vanish as a dead man.',
+      tw: 'As the cuffs click, Elias smiles: "Check your coat pocket." You find a new note in the same handwriting but different ink: "Case two begins at dawn." Someone else has been watching all along... To be continued.',
+      clue: 'Elias did it. And someone else is still watching.'
+    }
+  ];
+
+  let st = A.store.get('detective', { ch: 0, ok: 0, log: [], answered: false, pick: -1 });
+  const wrap = A.el('div', 'dom'); box.appendChild(wrap);
+
+  function save() { A.store.set('detective', st); }
+  function rank(n) {
+    return n >= 15 ? 'IMPOSSIBLE DETECTIVE 🏆' : n >= 12 ? 'Master Detective' : n >= 8 ? 'Sharp Inspector' : 'Rookie Constable';
+  }
+  function render() {
+    if (st.ch >= CH.length) return ending();
+    const c = CH[st.ch];
+    let h = '<div class="dtop"><div class="dots">';
+    for (let i = 0; i < CH.length; i++) h += '<div class="dot' + (i < st.log.length ? (st.log[i] ? ' ok' : ' bad') : '') + (i === st.ch ? ' now' : '') + '"></div>';
+    h += '</div><div><span class="small">Insight <b>' + st.ok + '</b>/' + CH.length + '</span> <button class="btn" id="nb">📓 Notebook</button></div></div>';
+    h += '<div class="panel story"><h2>Chapter ' + (st.ch + 1) + ': ' + c.t + '</h2><p>' + c.s + '</p><p><b>' + c.q + '</b></p>';
+    c.o.forEach((o, i) => {
+      let cls = 'opt';
+      if (st.answered) cls += i === c.a ? ' right' : i === st.pick ? ' wrong' : '';
+      h += '<button class="' + cls + '" data-i="' + i + '"' + (st.answered ? ' disabled' : '') + '>' + String.fromCharCode(65 + i) + '. ' + o + '</button>';
+    });
+    if (st.answered) {
+      const good = st.pick === c.a;
+      h += '<p>' + (good ? '✅ <b>Sharp thinking.</b> ' : '❌ <b>Not quite.</b> ') + c.r + '</p><div class="twist"><b>TWIST</b><br>' + c.tw + '</div>';
+      h += '<p style="text-align:center"><button class="btn big" id="next">' + (st.ch === CH.length - 1 ? 'SEE THE ENDING' : 'NEXT CHAPTER ▶') + '</button></p>';
+    }
+    h += '</div>';
+    wrap.innerHTML = h;
+    wrap.querySelectorAll('.opt').forEach(b => b.onclick = () => answer(+b.dataset.i));
+    const nx = wrap.querySelector('#next'); if (nx) nx.onclick = () => { st.ch++; st.answered = false; st.pick = -1; save(); render(); window.scrollTo(0, 0); };
+    wrap.querySelector('#nb').onclick = notebook;
+  }
+  function answer(i) {
+    const c = CH[st.ch], good = i === c.a;
+    st.answered = true; st.pick = i; st.log[st.ch] = good ? 1 : 0; if (good) st.ok++;
+    A.beep(good ? 800 : 160, .25, good ? 'sine' : 'sawtooth', .07);
+    save(); render();
+  }
+  function notebook() {
+    const n = Math.min(st.ch + (st.answered ? 1 : 0), CH.length);
+    let h = '<h2>📓 Detective\'s Notebook</h2><ul class="notebook" style="text-align:left">';
+    for (let i = 0; i < n; i++) h += '<li><b>Ch.' + (i + 1) + ':</b> ' + CH[i].clue + '</li>';
+    if (!n) h += '<li>No clues yet.</li>';
+    h += '</ul>';
+    A.overlay(box, h, [{ label: 'Close', fn: () => { } }]);
+  }
+  function ending() {
+    const last = st.log[CH.length - 1];
+    const h = '<div class="panel story" style="text-align:center"><h2>CASE CLOSED</h2><p>' + (last ? 'You named the right culprit and the Hollowmere case is solved.' : 'You named the wrong culprit, but the evidence you gathered still brought the truth out in the end.') + '</p><p>Insight: <b>' + st.ok + ' / ' + CH.length + '</b></p><h2 style="color:#ffd04d">' + rank(st.ok) + '</h2><p class="small">Hollowmere is over. But that last note... who sent it?</p><button class="btn big" id="again">↻ Play again</button></div>';
+    wrap.innerHTML = h;
+    A.best('impossible-detective', st.ok);
+    wrap.querySelector('#again').onclick = () => { st = { ch: 0, ok: 0, log: [], answered: false, pick: -1 }; save(); render(); };
+  }
+  if (st.ch === 0 && !st.answered) {
+    wrap.innerHTML = '<div class="panel story" style="text-align:center"><h2>THE IMPOSSIBLE DETECTIVE</h2><p>A locked vault. A dead billionaire. A recorded gunshot. Fifteen chapters, each with a deduction to make and a twist to survive.</p><p class="small">Progress is saved automatically on this device.</p><button class="btn big" id="go">▶ BEGIN THE CASE</button></div>';
+    wrap.querySelector('#go').onclick = render;
+  } else render();
+});
+
+Arcade.reg("g-factory.js", function (box, A) {
+  const RES = {
+    stone: ['Stone', '🪨', 1], coal: ['Coal', '⚫', 1], copper: ['Copper Ore', '🟤', 1],
+    iron: ['Iron Ore', '⛓️', 2], sulfur: ['Sulfur', '🟡', 2],
+    gold: ['Gold Ore', '🟨', 3], obsidian: ['Obsidian', '⬛', 3],
+    crystal: ['Crystal', '💎', 4], silver: ['Silver Ore', '⚪', 4],
+    void: ['Void Essence', '🌀', 5],
+    cuI: ['Copper Ingot', '🧱', 1], feI: ['Iron Ingot', '🔩', 2], auI: ['Gold Ingot', '🥇', 3], agI: ['Silver Ingot', '🥈', 4],
+    wire: ['Wire', '🧵', 1], plate: ['Steel Plate', '🛡️', 2], gear: ['Gear', '⚙️', 2], circuit: ['Circuit', '🔌', 3],
+    lens: ['Focus Lens', '🔍', 4], cell: ['Power Cell', '🔋', 4], quantum: ['Quantum Engine', '🚀', 5]
+  };
+  const LAYERS = [
+    { n: 'Surface Mine', e: '⛏️' }, { n: 'Deep Caverns', e: '🕳️' }, { n: 'Magma Layer', e: '🌋' }, { n: 'Crystal Vault', e: '💠' }, { n: 'Void Core', e: '🌀' }
+  ];
+  const UNLOCK = [null, { stone: 200, cuI: 10 }, { plate: 15, gear: 10, feI: 10 }, { circuit: 8, plate: 20, auI: 10 }, { lens: 8, cell: 8, circuit: 15, agI: 10 }];
+  // raw: [rate per miner per sec, miner cost]
+  const MINE = {
+    stone: [.8, { stone: 10 }], coal: [.5, { stone: 25 }], copper: [.5, { stone: 40, coal: 10 }],
+    iron: [.4, { stone: 100, cuI: 5 }], sulfur: [.3, { stone: 150, cuI: 8 }],
+    gold: [.25, { plate: 5, gear: 3 }], obsidian: [.25, { plate: 8, stone: 200 }],
+    crystal: [.2, { circuit: 3, plate: 10 }], silver: [.2, { circuit: 3, gear: 10 }],
+    void: [.1, { cell: 3, lens: 3, circuit: 5 }]
+  };
+  const REC = [
+    { id: 'smeltCu', n: 'Smelt Copper', L: 1, in: { copper: 2, coal: 1 }, out: { cuI: 1 }, t: 2 },
+    { id: 'wireR', n: 'Draw Wire', L: 1, in: { cuI: 1 }, out: { wire: 2 }, t: 2 },
+    { id: 'smeltFe', n: 'Smelt Iron', L: 2, in: { iron: 2, coal: 1 }, out: { feI: 1 }, t: 3 },
+    { id: 'plateR', n: 'Press Steel Plate', L: 2, in: { feI: 2 }, out: { plate: 1 }, t: 3 },
+    { id: 'gearR', n: 'Cut Gear', L: 2, in: { feI: 1, stone: 2 }, out: { gear: 1 }, t: 3 },
+    { id: 'smeltAu', n: 'Smelt Gold', L: 3, in: { gold: 2, coal: 2, sulfur: 1 }, out: { auI: 1 }, t: 4 },
+    { id: 'circuitR', n: 'Assemble Circuit', L: 3, in: { wire: 4, auI: 1 }, out: { circuit: 1 }, t: 5 },
+    { id: 'smeltAg', n: 'Smelt Silver', L: 4, in: { silver: 2, coal: 2 }, out: { agI: 1 }, t: 4 },
+    { id: 'lensR', n: 'Grind Focus Lens', L: 4, in: { crystal: 2, obsidian: 1 }, out: { lens: 1 }, t: 5 },
+    { id: 'cellR', n: 'Charge Power Cell', L: 4, in: { agI: 1, crystal: 1, sulfur: 1 }, out: { cell: 1 }, t: 6 },
+    { id: 'quantumR', n: 'Build Quantum Engine', L: 5, in: { void: 3, circuit: 2, cell: 1, lens: 1, plate: 2 }, out: { quantum: 1 }, t: 12 }
+  ];
+  const MCOST = { 1: { stone: 60 }, 2: { stone: 150, cuI: 10 }, 3: { plate: 10, gear: 5 }, 4: { circuit: 5, plate: 10 }, 5: { circuit: 10, cell: 5, lens: 5 } };
+  const GOAL = 3;
+
+  const fresh = () => ({ items: {}, miners: {}, machines: {}, layers: 1, pick: 1, time: 0, won: false });
+  let S = A.store.get('forge', null) || fresh();
+  Object.keys(RES).forEach(k => { if (S.items[k] == null) S.items[k] = 0; });
+  let tab = 0;
+
+  const root = A.el('div', 'dom'); box.appendChild(root);
+  root.innerHTML = '<div class="panel"><b>📦 Inventory</b> <span class="small" id="goal"></span><div class="inv" id="inv"></div></div><div class="ftabs" id="tabs"></div><div class="panel" id="body"></div><div class="panel small">Progress saves automatically. <button class="btn" id="reset">Reset save</button> <button class="btn" id="upg"></button></div>';
+  const inv = root.querySelector('#inv'), tabsEl = root.querySelector('#tabs'), body = root.querySelector('#body'), goal = root.querySelector('#goal'), upg = root.querySelector('#upg');
+  const costStr = c => Object.keys(c).map(k => RES[k][1] + ' ' + A.fmt(c[k]) + ' ' + RES[k][0]).join(', ');
+  const can = c => Object.keys(c).every(k => S.items[k] >= c[k] - 1e-9);
+  const pay = c => Object.keys(c).forEach(k => S.items[k] -= c[k]);
+  const scaled = (c, n, g) => { const o = {}; Object.keys(c).forEach(k => o[k] = Math.ceil(c[k] * Math.pow(g, n))); return o; };
+  const minerCost = k => scaled(MINE[k][1], S.miners[k] || 0, 1.18);
+  const machCost = r => scaled(MCOST[r.L], S.machines[r.id] || 0, 1.25);
+
+  const invEls = {};
+  Object.keys(RES).forEach(k => { const s = A.el('span', 'zero'); inv.appendChild(s); invEls[k] = s; });
+
+  const tabBtns = LAYERS.map((l, i) => { const b = A.el('button', 'ftab'); b.onclick = () => { tab = i; build(); }; tabsEl.appendChild(b); return b; });
+  let rows = {};
+
+  function build() {
+    rows = {}; body.innerHTML = '';
+    tabBtns.forEach((b, i) => b.classList.toggle('on', i === tab));
+    const L = tab + 1;
+    if (L > S.layers) {
+      const need = UNLOCK[tab], b = A.el('div');
+      b.innerHTML = '<h3 style="margin-top:0">' + LAYERS[tab].e + ' ' + LAYERS[tab].n + ' (locked)</h3><p>Dig a shaft down to reach new ores and recipes.</p><p>Cost: ' + costStr(need) + '</p>';
+      const u = A.el('button', 'btn gold', '⛏️ Dig shaft');
+      u.onclick = () => { if (L === S.layers + 1 && can(need)) { pay(need); S.layers = L; A.beep(300, .4, 'sawtooth', .08); build(); } };
+      b.appendChild(u); rows.unlock = { btn: u, need, L }; body.appendChild(b); return;
+    }
+    const h = A.el('h3', null, LAYERS[tab].e + ' ' + LAYERS[tab].n); h.style.marginTop = '0'; body.appendChild(h);
+    body.appendChild(A.el('div', 'small', '<b>Mining</b>: click to dig, buy miners to dig automatically.'));
+    Object.keys(MINE).filter(k => RES[k][2] === L).forEach(k => {
+      const r = A.el('div', 'frow');
+      r.innerHTML = '<div class="nm">' + RES[k][1] + ' ' + RES[k][0] + '</div><div class="info"></div>';
+      const m = A.el('button', 'btn', '⛏ Mine');
+      m.onclick = () => { S.items[k] += S.pick; A.beep(200 + Math.random() * 60, .03, 'square', .02); };
+      const b = A.el('button', 'btn gold'); b.onclick = () => { const c = minerCost(k); if (can(c)) { pay(c); S.miners[k] = (S.miners[k] || 0) + 1; A.beep(600, .1, 'triangle', .05); } };
+      r.appendChild(m); r.appendChild(b); body.appendChild(r);
+      rows['m' + k] = { info: r.querySelector('.info'), btn: b, k };
+    });
+    body.appendChild(A.el('div', 'small', '<br><b>Processing</b>: machines run recipes automatically while they have inputs. Craft once by hand to bootstrap.'));
+    REC.filter(x => x.L === L).forEach(x => {
+      const r = A.el('div', 'frow');
+      r.innerHTML = '<div class="nm">' + x.n + '</div><div class="info"></div><div class="prog"><i></i></div>';
+      const c = A.el('button', 'btn', '✋ Craft');
+      c.onclick = () => { if (can(x.in)) { pay(x.in); Object.keys(x.out).forEach(k => S.items[k] += x.out[k]); A.beep(500, .08, 'triangle', .04); } };
+      const b = A.el('button', 'btn gold'); b.onclick = () => { const cc = machCost(x); if (can(cc)) { pay(cc); S.machines[x.id] = (S.machines[x.id] || 0) + 1; A.beep(600, .1, 'triangle', .05); } };
+      r.insertBefore(c, r.querySelector('.prog')); r.insertBefore(b, r.querySelector('.prog'));
+      body.appendChild(r);
+      rows['r' + x.id] = { info: r.querySelector('.info'), btn: b, craft: c, bar: r.querySelector('.prog i'), x };
+    });
+  }
+
+  function refresh() {
+    tabBtns.forEach((b, i) => { b.textContent = LAYERS[i].e + ' L' + (i + 1) + (i + 1 > S.layers ? ' 🔒' : ''); });
+    Object.keys(RES).forEach(k => {
+      const L = RES[k][2], el = invEls[k], v = S.items[k];
+      el.style.display = (L <= S.layers) ? '' : 'none';
+      el.className = v < 1 ? 'zero' : '';
+      el.textContent = RES[k][1] + ' ' + A.fmt(v);
+      el.title = RES[k][0];
+    });
+    goal.textContent = ' • Goal: build ' + GOAL + ' Quantum Engines (' + Math.floor(S.items.quantum) + '/' + GOAL + ')';
+    upg.textContent = '⛏ Upgrade pickaxe (' + costStr(pickCost()) + ') • power ' + S.pick;
+    upg.disabled = !can(pickCost());
+    if (rows.unlock) rows.unlock.btn.disabled = !(rows.unlock.L === S.layers + 1 && can(rows.unlock.need));
+    for (const key in rows) {
+      const r = rows[key];
+      if (key[0] === 'm') {
+        const n = S.miners[r.k] || 0, c = minerCost(r.k);
+        r.info.textContent = n + ' miners • +' + (n * MINE[r.k][0]).toFixed(1) + '/s • manual +' + S.pick;
+        r.btn.textContent = '+ Miner (' + costStr(c) + ')'; r.btn.disabled = !can(c);
+      } else if (key[0] === 'r') {
+        const n = S.machines[r.x.id] || 0, c = machCost(r.x);
+        r.info.innerHTML = costStr(r.x.in) + ' → ' + costStr(r.x.out) + ' • ' + r.x.t + 's • <b>' + n + '</b> machines';
+        r.btn.textContent = '+ Machine (' + costStr(c) + ')'; r.btn.disabled = !can(c);
+        r.craft.disabled = !can(r.x.in);
+        r.bar.style.width = (r.x.prog || 0) * 100 + '%';
+      }
+    }
+  }
+  const pickCost = () => scaled({ stone: 100, cuI: 5 }, Math.log2(S.pick), 2.2);
+  upg.onclick = () => { const c = pickCost(); if (can(c)) { pay(c); S.pick *= 2; A.beep(700, .15, 'triangle', .06); } };
+  root.querySelector('#reset').onclick = () => { if (confirm('Delete your factory and start over?')) { S = fresh(); Object.keys(RES).forEach(k => S.items[k] = 0); tab = 0; build(); refresh(); } };
+
+  function tick(dt) {
+    S.time += dt;
+    Object.keys(MINE).forEach(k => { const n = S.miners[k] || 0; if (n) S.items[k] += n * MINE[k][0] * dt; });
+    REC.forEach(x => {
+      const n = S.machines[x.id] || 0; x.prog = 0;
+      if (!n) return;
+      let cyc = n * dt / x.t;
+      Object.keys(x.in).forEach(k => { cyc = Math.min(cyc, S.items[k] / x.in[k]); });
+      if (cyc <= 0) return;
+      Object.keys(x.in).forEach(k => S.items[k] -= x.in[k] * cyc);
+      Object.keys(x.out).forEach(k => S.items[k] += x.out[k] * cyc);
+      x.prog = Math.min(1, cyc / (n * dt / x.t));
+    });
+    if (!S.won && S.items.quantum >= GOAL) {
+      S.won = true; A.best('deep-forge', Math.round(S.time), true);
+      A.overlay(box, '<h2>🚀 FORGE COMPLETE</h2><p>You built ' + GOAL + ' Quantum Engines in ' + Math.round(S.time / 60) + ' minutes of play.</p><p>You can keep building if you like.</p>', [{ label: 'Keep going', fn: () => { } }]);
+    }
+  }
+
+  let saveT = 0;
+  A.loop(dt => {
+    tick(dt); refresh();
+    saveT += dt; if (saveT > 4) { saveT = 0; A.store.set('forge', S); }
+  });
+  window.addEventListener('beforeunload', () => A.store.set('forge', S));
+  build(); refresh();
+});
+
+Arcade.reg("g-punch.js", function (box, A) {
+  const W = 960, H = 440, MAXHP = 300, ROUND_T = 45;
+  const bar = A.el('div', 'gbar'); box.appendChild(bar);
+  const C = A.canvas(box, W, H), ctx = C.ctx;
+  const padHost = A.el('div'); box.appendChild(padHost);
+  const POPS = ['POW!', 'BAM!', 'WHAM!', 'BONK!', 'SMACK!', 'THWACK!'];
+
+  function mkP(name, keys, col, face) { return { name, keys, col, face, hp: MAXHP, combo: 0, last: '', lastT: 0, rec: [], anim: 0, ak: 0, flash: 0, wins: 0, best: 0 }; }
+  let p1, p2, state = 'menu', mode = 'bot', level = 1, round = 1, timer = ROUND_T, pops = [], msg = '', msgT = 0, botT = 0, shake = 0;
+  const now = () => performance.now();
+
+  function newMatch(m, lv) {
+    mode = m; level = lv;
+    p1 = mkP('P1', ['a', 's', 'd', 'f'], '#4da3ff', '😤');
+    p2 = mkP(m === 'bot' ? 'BOT' : 'P2', ['j', 'k', 'l', ';'], '#ff5470', '😈');
+    round = 1; startRound(); buildPad();
+  }
+  function startRound() {
+    p1.hp = p2.hp = MAXHP; p1.combo = p2.combo = 0; p1.last = p2.last = ''; timer = ROUND_T; pops = [];
+    state = 'ready'; msg = 'ROUND ' + round; msgT = 1.3; botT = 0;
+  }
+  function press(p, k) {
+    if (state !== 'fight') return;
+    const o = p === p1 ? p2 : p1, t = now();
+    p.rec = p.rec.filter(r => t - r.t < 100);
+    const sup = p.rec.some(r => r.k !== k);
+    p.rec.push({ k, t });
+    if (k === p.last) p.combo = 0; else if (t - p.lastT < 800) p.combo = Math.min(10, p.combo + 1); else p.combo = 1;
+    p.best = Math.max(p.best, p.combo);
+    p.last = k; p.lastT = t;
+    const dmg = (0.8 + 0.3 * p.combo) * (sup ? 2.5 : 1);
+    o.hp = Math.max(0, o.hp - dmg);
+    p.anim = .14; p.ak = Math.max(0, p.keys.indexOf(k)); o.flash = .12;
+    shake = sup ? 8 : 2;
+    pops.push({ x: o === p2 ? 700 : 260, y: 150 + Math.random() * 60, t: sup ? 'SUPER PUNCH!' : (p.combo >= 5 ? 'COMBO x' + p.combo + '!' : A.pick(POPS)), c: sup ? '#ffd04d' : p.combo >= 5 ? '#ff7ad9' : '#fff', life: .7, big: sup });
+    A.beep(sup ? 140 : 200 + p.combo * 25, .08, sup ? 'sawtooth' : 'square', sup ? .07 : .04);
+  }
+  function endRound(w) {
+    state = 'between';
+    if (w) w.wins++;
+    msg = w ? (w.name + ' WINS THE ROUND!') : 'DRAW!'; msgT = 2.2;
+  }
+  function checkEnd() {
+    if (p1.hp <= 0 || p2.hp <= 0) endRound(p1.hp <= 0 ? p2 : p1);
+    else if (timer <= 0) endRound(p1.hp > p2.hp ? p1 : p2.hp > p1.hp ? p2 : null);
+  }
+  function afterBetween() {
+    if (p1.wins >= 2 || p2.wins >= 2) {
+      state = 'end';
+      const w = p1.wins >= 2 ? p1 : p2;
+      let extra = '';
+      if (mode === 'bot') { const sc = (p1.wins >= 2 ? 100 * level : 0) + p1.wins * 30 + p1.best * 5; const r = A.best('button-brawl', sc); extra = '<p>Score ' + sc + ' • Best ' + r.best + (r.isNew ? ' 🏆' : '') + '</p>'; }
+      A.overlay(box, '<h2>' + w.name + ' WINS THE MATCH!</h2><p>Rounds ' + p1.wins + ' – ' + p2.wins + '</p><p>Best combos: P1 x' + p1.best + ' • ' + p2.name + ' x' + p2.best + '</p>' + extra, [{ label: '↻ REMATCH', fn: () => newMatch(mode, level) }, { label: 'MENU', fn: menu }]);
+    } else { round++; startRound(); }
+  }
+
+  function bot(dt) {
+    botT -= dt;
+    if (botT > 0) return;
+    const rate = [3, 5, 7.5][level - 1];
+    botT = (1 / rate) * A.rand(.6, 1.4);
+    const ks = p2.keys; let k;
+    do { k = A.pick(ks); } while (k === p2.last && Math.random() < .85);
+    press(p2, k);
+    if (Math.random() < [.03, .08, .16][level - 1]) { let k2; do { k2 = A.pick(ks); } while (k2 === k); press(p2, k2); }
+  }
+
+  A.onKey(k => {
+    if (state !== 'fight') return;
+    if (p1.keys.includes(k)) press(p1, k);
+    if (mode === '2p' && p2.keys.includes(k)) press(p2, k);
+  });
+
+  function buildPad() {
+    padHost.innerHTML = '';
+    const mk = (p, cls, labels) => {
+      const row = A.el('div', 'padrow');
+      p.keys.forEach((k, i) => { const b = A.el('button', 'pbtn ' + cls, '👊<br><small>' + labels[i] + '</small>'); b.addEventListener('pointerdown', e => { e.preventDefault(); press(p, k); }); row.appendChild(b); });
+      return row;
+    };
+    padHost.appendChild(mk(p1, '', ['A', 'S', 'D', 'F']));
+    if (mode === '2p') padHost.appendChild(mk(p2, 'p2', ['J', 'K', 'L', ';']));
+  }
+
+  function fighter(p, x, dir) {
+    const sh = p.flash > 0 ? (Math.random() - .5) * 12 : 0, cx = x + sh;
+    ctx.strokeStyle = p.col; ctx.lineWidth = 9; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(cx, 300); ctx.lineTo(cx - 24, 375); ctx.moveTo(cx, 300); ctx.lineTo(cx + 24, 375); ctx.moveTo(cx, 225); ctx.lineTo(cx, 300); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx, 240); ctx.lineTo(cx - dir * 26, 280); ctx.stroke();
+    const ext = p.anim > 0 ? 1 : .3, ex = cx + dir * (36 + ext * 80), ey = 245 + (p.ak - 1.5) * 20;
+    ctx.beginPath(); ctx.moveTo(cx, 240); ctx.lineTo(ex, ey); ctx.stroke();
+    ctx.font = '34px serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.save(); ctx.translate(ex, ey); if (dir < 0) ctx.scale(-1, 1); ctx.fillText('🥊', 0, 0); ctx.restore();
+    ctx.fillStyle = p.col; ctx.beginPath(); ctx.arc(cx, 198, 28, 0, 7); ctx.fill();
+    ctx.font = '36px serif'; ctx.fillStyle = '#fff'; ctx.fillText(p.flash > 0 ? '😵' : p.face, cx, 200);
+    ctx.font = 'bold 13px system-ui'; ctx.fillStyle = '#9fb3c6'; ctx.fillText(p.keys.map(k => k.toUpperCase()).join('  '), x, 405);
+  }
+
+  function update(dt) {
+    [p1, p2].forEach(p => { if (p) { p.anim = Math.max(0, p.anim - dt); p.flash = Math.max(0, p.flash - dt); } });
+    shake = Math.max(0, shake - dt * 30);
+    pops.forEach(p => { p.y -= 40 * dt; p.life -= dt; }); pops = pops.filter(p => p.life > 0);
+    if (state === 'ready') { msgT -= dt; if (msgT <= 0) { state = 'fight'; msg = 'FIGHT!'; msgT = .8; } }
+    else if (state === 'fight') { timer -= dt; if (mode === 'bot') bot(dt); msgT -= dt; checkEnd(); }
+    else if (state === 'between') { msgT -= dt; if (msgT <= 0) afterBetween(); }
+    if (p1) bar.innerHTML = '<span style="color:#4da3ff">P1 rounds <b>' + p1.wins + '</b></span><span>ROUND <b>' + round + '</b></span><span>TIME <b>' + Math.max(0, Math.ceil(timer)) + '</b></span><span style="color:#ff5470">' + p2.name + ' rounds <b>' + p2.wins + '</b></span>';
+  }
+
+  function draw() {
+    ctx.save();
+    if (shake > 0) ctx.translate((Math.random() - .5) * shake, (Math.random() - .5) * shake);
+    const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#16102e'); g.addColorStop(1, '#2a1740');
+    ctx.fillStyle = g; ctx.fillRect(-10, -10, W + 20, H + 20);
+    ctx.fillStyle = '#1b1030'; ctx.fillRect(-10, 380, W + 20, 80);
+    ctx.strokeStyle = '#4a2a7a'; ctx.beginPath(); ctx.moveTo(0, 380); ctx.lineTo(W, 380); ctx.stroke();
+    if (p1) {
+      fighter(p1, 250, 1); fighter(p2, 710, -1);
+      const hb = (p, x, right) => {
+        const w = 360, f = Math.max(0, p.hp / MAXHP);
+        ctx.fillStyle = '#222'; ctx.fillRect(right ? x - w : x, 20, w, 22);
+        ctx.fillStyle = f > .35 ? '#4dff9a' : '#ff5470'; ctx.fillRect(right ? x - w * f : x, 20, w * f, 22);
+        ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.strokeRect(right ? x - w : x, 20, w, 22);
+        ctx.font = 'bold 14px system-ui'; ctx.textAlign = right ? 'right' : 'left'; ctx.fillStyle = '#fff';
+        ctx.fillText(p.name, right ? x : x, 60);
+        if (p.combo > 1) { ctx.fillStyle = '#ff7ad9'; ctx.font = 'bold 22px system-ui'; ctx.fillText('COMBO x' + p.combo, right ? x : x, 84); }
+      };
+      hb(p1, 30, false); hb(p2, W - 30, true);
+      ctx.textAlign = 'center'; ctx.fillStyle = '#ffd04d'; ctx.font = 'bold 30px system-ui'; ctx.fillText(Math.max(0, Math.ceil(timer)), W / 2, 40);
+      for (const p of pops) { ctx.globalAlpha = Math.min(1, p.life * 2); ctx.fillStyle = p.c; ctx.font = (p.big ? 'bold 34px' : 'bold 22px') + ' system-ui'; ctx.fillText(p.t, p.x, p.y); }
+      ctx.globalAlpha = 1;
+      if (msgT > 0 && msg) { ctx.font = 'bold 56px system-ui'; ctx.fillStyle = '#fff'; ctx.shadowColor = '#000'; ctx.shadowBlur = 12; ctx.fillText(msg, W / 2, 210); ctx.shadowBlur = 0; }
+    }
+    ctx.restore();
+  }
+
+  function menu() {
+    state = 'menu'; padHost.innerHTML = '';
+    A.overlay(box, '<h2>BUTTON BRAWL</h2><p>Every key is a different punch. <b>Alternate keys</b> to build a combo. Hitting the same key twice breaks it. Press <b>two keys at once</b> for a 2.5x SUPER PUNCH.<br>P1: <b>A S D F</b> &nbsp;•&nbsp; P2: <b>J K L ;</b> &nbsp;•&nbsp; Phone: tap the buttons.</p><p>Best of 3 rounds. Choose a mode:</p>',
+      [{ label: 'VS BOT: EASY', fn: () => newMatch('bot', 1) }, { label: 'NORMAL', fn: () => newMatch('bot', 2) }, { label: 'HARD', fn: () => newMatch('bot', 3) }, { label: '2 PLAYERS', fn: () => newMatch('2p', 1) }]);
+  }
+
+  A.loop(dt => { update(dt); draw(); });
+  menu();
+});
+
+Arcade.reg("g-mini.js", function (box, A) {
+  const id = A.gameId;
+  const W = 960;
+
+  /* ===================== PIGEON MAIL ===================== */
+  function pigeon() {
+    const H = 540, bar = A.el('div', 'gbar'); box.appendChild(bar);
+    const C = A.canvas(box, W, H), ctx = C.ctx, P = C.p;
+    const WORDS = ['COO!', 'FLAP!', 'MAIL!', 'SQUAWK!', 'WHEEE!', 'PIGEON!'];
+    let bird, pipes, score, state = 'menu', pops, dist, clouds = [];
+    for (let i = 0; i < 6; i++) clouds.push({ x: A.rand(0, W), y: A.rand(30, 300), s: A.rand(.6, 1.4) });
+    function start() { bird = { x: 220, y: H / 2, vy: 0 }; pipes = []; score = 0; pops = []; dist = 0; state = 'play'; }
+    function flap() { if (state !== 'play') return; bird.vy = -400; A.beep(520, .07, 'triangle', .04); pops.push({ x: bird.x, y: bird.y - 20, t: A.pick(WORDS), life: .6 }); }
+    A.onKey(k => { if (k === ' ' || k === 'arrowup' || k === 'w') flap(); });
+    function die() {
+      state = 'end'; A.beep(120, .5, 'sawtooth', .08);
+      const r = A.best('pigeon-mail', score);
+      A.overlay(box, '<h2>SPLAT!</h2><p>Mail delivered: <b>' + score + '</b> • Best <b>' + r.best + '</b>' + (r.isNew ? ' 🏆' : '') + '</p><p>The pigeon is fine. His pride is not.</p>', [{ label: '↻ AGAIN', fn: start }]);
+    }
+    A.loop(dt => {
+      if (P.clicked) { P.clicked = false; flap(); }
+      clouds.forEach(c => { c.x -= 15 * c.s * dt; if (c.x < -80) c.x = W + 80; });
+      if (state === 'play') {
+        const sp = Math.min(320, 210 + score * 4), gap = Math.max(150, 200 - score * 2);
+        bird.vy += 1200 * dt; bird.y += bird.vy * dt; dist += sp * dt;
+        if (!pipes.length || pipes[pipes.length - 1].x < W - 330) pipes.push({ x: W + 40, gy: A.rand(gap / 2 + 50, H - gap / 2 - 70), gap, passed: false, env: true });
+        pipes.forEach(p => {
+          p.x -= sp * dt;
+          if (!p.passed && p.x + 40 < bird.x) { p.passed = true; score++; A.beep(800, .08, 'sine', .05); }
+          if (p.env && Math.hypot(p.x + 35 - bird.x, p.gy - bird.y) < 34) { p.env = false; score += 2; pops.push({ x: bird.x, y: bird.y - 30, t: '+2 ✉️', life: .7 }); A.beep(1100, .12, 'sine', .06); }
+          if (bird.x + 14 > p.x && bird.x - 14 < p.x + 70 && (bird.y - 14 < p.gy - p.gap / 2 || bird.y + 14 > p.gy + p.gap / 2)) die();
+        });
+        pipes = pipes.filter(p => p.x > -90);
+        if (bird.y > H - 30 || bird.y < -20) die();
+        pops.forEach(p => { p.y -= 40 * dt; p.life -= dt; }); pops = pops.filter(p => p.life > 0);
+      }
+      const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#6ec6ff'); g.addColorStop(1, '#d6f0ff'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      ctx.font = '60px serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      clouds.forEach(c => { ctx.globalAlpha = .8; ctx.font = (50 * c.s) + 'px serif'; ctx.fillText('☁️', c.x, c.y); }); ctx.globalAlpha = 1;
+      ctx.fillStyle = '#7a8a5a'; ctx.fillRect(0, H - 20, W, 20);
+      if (pipes) pipes.forEach(p => {
+        ctx.fillStyle = '#b5543a'; ctx.fillRect(p.x, 0, 70, p.gy - p.gap / 2); ctx.fillRect(p.x, p.gy + p.gap / 2, 70, H);
+        ctx.fillStyle = '#8c3f2b'; ctx.fillRect(p.x - 6, p.gy - p.gap / 2 - 22, 82, 22); ctx.fillRect(p.x - 6, p.gy + p.gap / 2, 82, 22);
+        ctx.strokeStyle = '#8c3f2b'; for (let y = 10; y < p.gy - p.gap / 2 - 22; y += 24) { ctx.beginPath(); ctx.moveTo(p.x, y); ctx.lineTo(p.x + 70, y); ctx.stroke(); }
+        for (let y = p.gy + p.gap / 2 + 34; y < H; y += 24) { ctx.beginPath(); ctx.moveTo(p.x, y); ctx.lineTo(p.x + 70, y); ctx.stroke(); }
+        if (p.env) { ctx.font = '30px serif'; ctx.fillText('✉️', p.x + 35, p.gy); }
+      });
+      if (bird) {
+        ctx.save(); ctx.translate(bird.x, bird.y); ctx.rotate(Math.max(-.5, Math.min(1, bird.vy / 600))); ctx.font = '44px serif'; ctx.scale(-1, 1); ctx.fillText('🐦', 0, 0); ctx.restore();
+        ctx.font = 'bold 20px system-ui'; ctx.fillStyle = '#073b66';
+        pops.forEach(p => { ctx.globalAlpha = Math.min(1, p.life * 2); ctx.fillText(p.t, p.x, p.y); }); ctx.globalAlpha = 1;
+      }
+      bar.innerHTML = '<span>MAIL <b>' + (score || 0) + '</b></span><span>BEST <b>' + A.getBest('pigeon-mail', 0) + '</b></span><span>Tap / Space / Click to flap</span>';
+    });
+    A.overlay(box, '<h2>PIGEON MAIL</h2><p>You are a chubby pigeon with a very important letter.<br>Tap, click or press <b>Space</b> to flap through the chimneys. Grab ✉️ for +2.</p>', [{ label: '▶ TAKE OFF', fn: start }]);
+  }
+
+  /* ===================== TOAST TOWER ===================== */
+  function toast() {
+    const H = 540, BH = 30, bar = A.el('div', 'gbar'); box.appendChild(bar);
+    const C = A.canvas(box, W, H), ctx = C.ctx, P = C.p;
+    let stack, cur, state = 'menu', score, cam = 0, falls = [], msg = '', msgT = 0;
+    const COLS = ['#d9a05b', '#c98d45'];
+    function start() { stack = [{ x: W / 2 - 130, w: 260 }]; score = 0; falls = []; cam = 0; nextBlock(260, 240); state = 'play'; }
+    function nextBlock(w, sp) { cur = { x: 0, w, dir: 1, sp }; }
+    function drop() {
+      if (state !== 'play') return;
+      const top = stack[stack.length - 1];
+      const l = Math.max(cur.x, top.x), r = Math.min(cur.x + cur.w, top.x + top.w), ov = r - l;
+      if (ov <= 0) { falls.push({ x: cur.x, w: cur.w, y: yOf(stack.length), vy: 0, lvl: stack.length }); state = 'end'; return over(); }
+      if (Math.abs(cur.x - top.x) < 7) { stack.push({ x: top.x, w: top.w }); msg = 'PERFECT!'; A.beep(900, .15, 'sine', .07); }
+      else {
+        if (cur.x < top.x) falls.push({ x: cur.x, w: top.x - cur.x, y: yOf(stack.length), vy: 0, lvl: stack.length });
+        if (cur.x + cur.w > top.x + top.w) falls.push({ x: top.x + top.w, w: cur.x + cur.w - top.x - top.w, y: yOf(stack.length), vy: 0, lvl: stack.length });
+        stack.push({ x: l, w: ov }); msg = ov > top.w * .85 ? 'NICE!' : 'CRUMBS!'; A.beep(500, .1, 'triangle', .05);
+      }
+      msgT = .8; score = stack.length - 1;
+      nextBlock(stack[stack.length - 1].w, Math.min(560, 240 + score * 9));
+    }
+    const yOf = i => H - 60 - i * BH + cam;
+    function over() {
+      A.beep(110, .5, 'sawtooth', .08);
+      const r = A.best('toast-tower', score);
+      A.overlay(box, '<h2>BREAD-TASTROPHE!</h2><p>Your tower is <b>' + score + '</b> slices high. Best <b>' + r.best + '</b>' + (r.isNew ? ' 🏆' : '') + '</p>', [{ label: '↻ AGAIN', fn: start }]);
+    }
+    A.onKey(k => { if (k === ' ' || k === 'arrowdown' || k === 's') drop(); });
+    A.loop(dt => {
+      if (P.clicked) { P.clicked = false; drop(); }
+      if (state === 'play') {
+        cur.x += cur.dir * cur.sp * dt;
+        if (cur.x < 0) { cur.x = 0; cur.dir = 1; } if (cur.x + cur.w > W) { cur.x = W - cur.w; cur.dir = -1; }
+        const target = Math.max(0, (stack.length - 7) * BH); cam += (target - cam) * Math.min(1, dt * 4);
+      }
+      falls.forEach(f => { f.vy += 900 * dt; f.y += f.vy * dt; }); falls = falls.filter(f => f.y < H + 100);
+      msgT = Math.max(0, msgT - dt);
+      const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#2b1a3a'); g.addColorStop(1, '#6b3b2a'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      if (stack) {
+        ctx.fillStyle = '#8b5a2b'; ctx.fillRect(0, H - 30, W, 30);
+        const draw = (x, w, y, i) => {
+          const topping = i % 5 === 4 ? '#ffe27a' : i % 5 === 2 ? '#c0243a' : null;
+          ctx.fillStyle = COLS[i % 2]; ctx.fillRect(x, y, w, BH - 2);
+          if (topping) { ctx.fillStyle = topping; ctx.fillRect(x, y, w, 8); }
+        };
+        stack.forEach((b, i) => draw(b.x, b.w, yOf(i), i));
+        falls.forEach(f => draw(f.x, f.w, f.y, f.lvl));
+        if (state === 'play') draw(cur.x, cur.w, yOf(stack.length), stack.length);
+        ctx.textAlign = 'center'; ctx.font = 'bold 40px system-ui'; ctx.fillStyle = '#fff';
+        if (msgT > 0) { ctx.globalAlpha = Math.min(1, msgT * 2); ctx.fillText(msg, W / 2, 90); ctx.globalAlpha = 1; }
+      }
+      bar.innerHTML = '<span>HEIGHT <b>' + (score || 0) + '</b></span><span>BEST <b>' + A.getBest('toast-tower', 0) + '</b></span><span>Tap / Space / Click to drop</span>';
+    });
+    A.overlay(box, '<h2>TOAST TOWER</h2><p>Stack toast into a breakfast skyscraper. Only the overlapping part survives. Land dead center for a PERFECT.<br>Tap, click or press <b>Space</b> to drop.</p>', [{ label: '▶ START TOASTING', fn: start }]);
+  }
+
+  /* ===================== CAT CHAOS ===================== */
+  function cat() {
+    const H = 540, bar = A.el('div', 'gbar'); box.appendChild(bar);
+    const C = A.canvas(box, W, H), ctx = C.ctx, P = C.p;
+    const ITEMS = [['🏺', 10], ['🥛', 5], ['📱', 8], ['🪴', 6], ['🕯️', 4], ['🍷', 7], ['🖼️', 9], ['🧸', 3], ['🔔', 4], ['💻', 12]];
+    const SY = [190, 320, 450], SX = [130, 270, 410, 550, 690, 830];
+    let items, state = 'menu', score, lives, timeLeft, owner, ot, pops, flash, catX = 480, catY = 480, shake = 0;
+    function start() {
+      items = []; for (let s = 0; s < 3; s++) for (let c = 0; c < 6; c++) if (Math.random() < .75) items.push(mkItem(s, c));
+      score = 0; lives = 3; timeLeft = 60; owner = 'away'; ot = A.rand(2, 4); pops = []; flash = 0; state = 'play';
+    }
+    function mkItem(s, c) { const it = A.pick(ITEMS); return { s, c, e: it[0], v: it[1], x: SX[c], y: SY[s], fall: false, vy: 0, rot: 0, respawn: 0 }; }
+    function over(why) {
+      state = 'end';
+      const r = A.best('cat-chaos', score);
+      A.overlay(box, '<h2>' + why + '</h2><p>Chaos score: <b>' + score + '</b> • Best <b>' + r.best + '</b>' + (r.isNew ? ' 🏆' : '') + '</p><p>The cat regrets nothing.</p>', [{ label: '↻ MORE CHAOS', fn: start }]);
+    }
+    function swat(x, y) {
+      for (const it of items) {
+        if (it.fall || it.respawn > 0) continue;
+        if (Math.abs(it.x - x) < 36 && Math.abs(it.y - 26 - y) < 40) {
+          catX = it.x; catY = it.y + 40;
+          if (owner === 'watch') { lives--; flash = .4; shake = 10; A.beep(120, .4, 'sawtooth', .08); pops.push({ x: it.x, y: it.y - 50, t: 'BUSTED!', c: '#ff5470', life: 1 }); if (lives <= 0) over('GROUNDED!'); }
+          else { it.fall = true; it.vy = -120; score += it.v; A.beep(300, .1, 'square', .06); pops.push({ x: it.x, y: it.y - 50, t: '+' + it.v, c: '#4dff9a', life: .8 }); }
+          return;
+        }
+      }
+    }
+    A.loop(dt => {
+      if (P.clicked) { P.clicked = false; if (state === 'play') swat(P.x, P.y); }
+      if (state === 'play') {
+        timeLeft -= dt; if (timeLeft <= 0) over('TIME UP!');
+        ot -= dt;
+        if (ot <= 0) {
+          if (owner === 'away') { owner = 'warn'; ot = .8; A.beep(700, .15, 'square', .04); }
+          else if (owner === 'warn') { owner = 'watch'; ot = A.rand(1, 2.2); }
+          else { owner = 'away'; ot = A.rand(1.5, 4); }
+        }
+        items.forEach(it => {
+          if (it.fall) { it.vy += 900 * dt; it.y += it.vy * dt; it.rot += dt * 6; if (it.y > H - 40 && !it.crashed) { it.crashed = true; A.beep(160, .25, 'sawtooth', .07); pops.push({ x: it.x, y: H - 60, t: 'CRASH!', c: '#ffd04d', life: .7 }); it.respawn = 1.6; it.fall = false; it.dead = true; } }
+          else if (it.respawn > 0) { it.respawn -= dt; if (it.respawn <= 0) { const n = mkItem(it.s, it.c); Object.assign(it, n); it.dead = false; it.crashed = false; } }
+        });
+        pops.forEach(p => { p.y -= 40 * dt; p.life -= dt; }); pops = pops.filter(p => p.life > 0);
+        flash = Math.max(0, flash - dt); shake = Math.max(0, shake - dt * 30);
+      }
+      ctx.save(); if (shake > 0) ctx.translate((Math.random() - .5) * shake, (Math.random() - .5) * shake);
+      ctx.fillStyle = '#3b2a45'; ctx.fillRect(-10, -10, W + 20, H + 20);
+      ctx.fillStyle = '#2a1d33'; for (let x = 0; x < W; x += 60) ctx.fillRect(x, 0, 30, H);
+      ctx.fillStyle = '#6b4a2a'; SY.forEach(y => ctx.fillRect(60, y + 6, 840, 12));
+      ctx.fillStyle = '#4a321c'; ctx.fillRect(0, H - 30, W, 30);
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      if (items) items.forEach(it => {
+        if (it.respawn > 0) return;
+        ctx.save(); ctx.translate(it.x, it.y - 26); ctx.rotate(it.fall ? it.rot : 0); ctx.font = '44px serif'; ctx.fillText(it.e, 0, 0); ctx.restore();
+      });
+      if (state !== 'menu') {
+        ctx.font = '50px serif'; ctx.fillText('🐱', catX, catY);
+        ctx.font = '70px serif'; ctx.fillText(owner === 'away' ? '😴' : owner === 'warn' ? '🤨' : '😡', 880, 70);
+        ctx.font = 'bold 22px system-ui'; ctx.fillStyle = owner === 'away' ? '#4dff9a' : owner === 'warn' ? '#ffd04d' : '#ff5470';
+        ctx.fillText(owner === 'away' ? 'SAFE' : owner === 'warn' ? '❗ GET READY' : '👀 STOP!', 740, 70);
+        ctx.font = 'bold 22px system-ui'; pops.forEach(p => { ctx.globalAlpha = Math.min(1, p.life * 2); ctx.fillStyle = p.c; ctx.fillText(p.t, p.x, p.y); }); ctx.globalAlpha = 1;
+      }
+      if (flash > 0) { ctx.fillStyle = 'rgba(255,0,0,' + flash * .6 + ')'; ctx.fillRect(0, 0, W, H); }
+      ctx.restore();
+      bar.innerHTML = '<span>SCORE <b>' + (score || 0) + '</b></span><span>TIME <b>' + Math.ceil(Math.max(0, timeLeft || 60)) + '</b></span><span>STRIKES <b>' + '😾'.repeat(Math.max(0, 3 - (lives == null ? 3 : lives))) + '😺'.repeat(Math.max(0, lives == null ? 3 : lives)) + '</b></span><span>BEST <b>' + A.getBest('cat-chaos', 0) + '</b></span>';
+    });
+    A.overlay(box, '<h2>CAT CHAOS</h2><p>Click objects to knock them off the shelves. Do it only when the owner is <b>asleep 😴</b>. When they show 🤨 get ready, when they show 😡 <b>STOP</b>. 3 strikes and you are grounded. 60 seconds.</p>', [{ label: '▶ BE A CAT', fn: start }]);
+  }
+
+  /* ===================== EMOJI MIX-UP ===================== */
+  function emoji() {
+    const ALL = ['🐸', '🦆', '🐙', '🦖', '🐧', '🦄', '🍕', '🌮', '🍌', '🥑', '🧀', '🍩', '🤡', '👻', '👽', '🦥', '🐢', '🦀', '🧦', '🥔', '🦑', '🐔', '🍉', '🦜'];
+    const wrap = A.el('div', 'dom'); box.appendChild(wrap);
+    let size = 16, cards, first = null, lock = false, moves, matched, t0, timerId = null;
+    function menu() { clearInterval(timerId); wrap.innerHTML = '<div class="panel" style="text-align:center"><h2 style="margin-top:0">EMOJI MIX-UP</h2><p>Flip two cards at a time and match all the ridiculous pairs in the fewest moves.</p><button class="btn big" data-n="12">12 cards</button> <button class="btn big" data-n="16">16 cards</button> <button class="btn big" data-n="24">24 cards</button></div>'; wrap.querySelectorAll('[data-n]').forEach(b => b.onclick = () => start(+b.dataset.n)); }
+    function start(n) {
+      size = n; const pick = ALL.slice().sort(() => Math.random() - .5).slice(0, n / 2);
+      cards = pick.concat(pick).sort(() => Math.random() - .5).map(e => ({ e, open: false, done: false }));
+      first = null; lock = false; moves = 0; matched = 0; t0 = performance.now();
+      clearInterval(timerId); timerId = setInterval(() => { const t = document.getElementById('mt'); if (t) t.textContent = ((performance.now() - t0) / 1000).toFixed(0) + 's'; }, 500);
+      render();
+    }
+    function render() {
+      const cols = size === 12 ? 4 : size === 16 ? 4 : 6;
+      let h = '<div class="panel" style="text-align:center">Moves <b>' + moves + '</b> • Time <b id="mt">0s</b> • Best moves (' + size + '): <b>' + A.getBest('emoji-' + size, '-') + '</b> <button class="btn" id="mn">Menu</button></div>';
+      h += '<div style="display:grid;grid-template-columns:repeat(' + cols + ',1fr);gap:8px;max-width:520px;margin:0 auto">';
+      cards.forEach((c, i) => { h += '<button class="opt" data-i="' + i + '" style="margin:0;text-align:center;font-size:2.2rem;padding:14px 0;' + (c.done ? 'border-color:#4dff9a;' : '') + '">' + (c.open || c.done ? c.e : '❓') + '</button>'; });
+      wrap.innerHTML = h + '</div>';
+      wrap.querySelectorAll('[data-i]').forEach(b => b.onclick = () => flip(+b.dataset.i));
+      wrap.querySelector('#mn').onclick = menu;
+    }
+    function flip(i) {
+      const c = cards[i]; if (lock || c.open || c.done) return;
+      c.open = true; A.beep(500, .05, 'triangle', .04);
+      if (first === null) { first = i; render(); return; }
+      moves++; const a = cards[first];
+      if (a.e === c.e) {
+        a.done = c.done = true; a.open = c.open = false; first = null; matched++; A.beep(900, .12, 'sine', .06);
+        render();
+        if (matched === size / 2) {
+          clearInterval(timerId);
+          const r = A.best('emoji-' + size, moves, true), sec = Math.round((performance.now() - t0) / 1000);
+          A.overlay(box, '<h2>ALL MATCHED!</h2><p>' + moves + ' moves in ' + sec + 's. Best: <b>' + r.best + '</b> moves' + (r.isNew ? ' 🏆' : '') + '</p>', [{ label: '↻ AGAIN', fn: () => start(size) }, { label: 'MENU', fn: menu }]);
+        }
+      } else {
+        lock = true; render();
+        setTimeout(() => { a.open = c.open = false; first = null; lock = false; render(); }, 800);
+      }
+    }
+    menu();
+  }
+
+  /* ===================== CHICKEN SHOWDOWN ===================== */
+  function chicken() {
+    const H = 420, bar = A.el('div', 'gbar'); box.appendChild(bar);
+    const C = A.canvas(box, W, H), ctx = C.ctx, P = C.p;
+    const TAUNTS = ['Bawk bawk!', 'Cluck you, cowboy!', 'My grandma draws faster. She is a hen.', 'Is that all you got?', 'Egg-cellent try!', 'I was born ready. From an egg.'];
+    let state = 'menu', round, wait, tDraw, botMs, result = '', taunt = '', best = A.getBest('chicken-reaction', null), react = 0, flashT = 0;
+    function start() { round = 1; ready(); }
+    function ready() { state = 'wait'; wait = A.rand(1.4, 4); result = ''; botMs = Math.max(130, 430 - round * 32) + A.rand(-25, 25); }
+    function fire() {
+      if (state === 'wait') { lose('FALSE START! You fired too early.'); }
+      else if (state === 'draw') {
+        react = performance.now() - tDraw; flashT = .25;
+        if (react < botMs) {
+          A.beep(900, .15, 'sine', .08);
+          if (best == null || react < best) { best = Math.round(react); A.store.set('chicken-reaction', best); }
+          result = 'You win the round! ' + Math.round(react) + ' ms vs ' + Math.round(botMs) + ' ms'; state = 'won'; wait = 1.6;
+        } else lose('Too slow! Cluck Norris drew in ' + Math.round(botMs) + ' ms.');
+      }
+    }
+    function lose(why) {
+      A.beep(110, .5, 'sawtooth', .08); state = 'end'; taunt = A.pick(TAUNTS);
+      const sc = round - 1, r = A.best('chicken-showdown', sc);
+      A.overlay(box, '<h2>YOU GOT PLUCKED</h2><p>' + why + '</p><p>Duels won: <b>' + sc + '</b> • Best <b>' + r.best + '</b>' + (r.isNew ? ' 🏆' : '') + '</p><p><i>"' + taunt + '"</i> 🐔</p>', [{ label: '↻ REMATCH', fn: start }]);
+    }
+    A.onKey(k => { if (k === ' ' || k === 'enter') fire(); });
+    A.loop(dt => {
+      if (P.clicked) { P.clicked = false; if (state === 'wait' || state === 'draw') fire(); }
+      flashT = Math.max(0, flashT - dt);
+      if (state === 'wait') { wait -= dt; if (wait <= 0) { state = 'draw'; tDraw = performance.now(); A.beep(1200, .12, 'square', .06); } }
+      else if (state === 'draw') { if (performance.now() - tDraw > botMs) { lose('Cluck Norris was faster: ' + Math.round(botMs) + ' ms. You did not fire.'); } }
+      else if (state === 'won') { wait -= dt; if (wait <= 0) { round++; ready(); } }
+      const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#ffb066'); g.addColorStop(1, '#ffe2a8'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = '#d9a35f'; ctx.fillRect(0, 300, W, 120);
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.font = '80px serif'; ctx.fillText('🌵', 480, 270); ctx.font = '50px serif'; ctx.fillText('🌅', 480, 60);
+      ctx.font = '110px serif'; ctx.fillText('🤠', 200, 250); ctx.save(); ctx.translate(760, 250); ctx.scale(-1, 1); ctx.fillText('🐔', 0, 0); ctx.restore();
+      ctx.font = 'bold 18px system-ui'; ctx.fillStyle = '#4a2a10'; ctx.fillText('YOU', 200, 330); ctx.fillText('CLUCK NORRIS', 760, 330);
+      ctx.font = 'bold 64px system-ui';
+      if (state === 'wait') { ctx.fillStyle = '#4a2a10'; ctx.fillText('wait for it…', 480, 160); }
+      else if (state === 'draw') { ctx.fillStyle = '#d4121f'; ctx.fillText('DRAW!', 480, 160); }
+      else if (state === 'won') { ctx.font = 'bold 28px system-ui'; ctx.fillStyle = '#1c6b2e'; ctx.fillText(result, 480, 160); ctx.font = '60px serif'; ctx.fillText('💥', 700, 250); }
+      if (flashT > 0) { ctx.fillStyle = 'rgba(255,255,255,' + flashT * 2 + ')'; ctx.fillRect(0, 0, W, H); }
+      bar.innerHTML = '<span>DUEL <b>' + (round || 1) + '</b></span><span>BEST REACTION <b>' + (best == null ? '-' : best + ' ms') + '</b></span><span>Space / Click / Tap = fire (only after DRAW!)</span>';
+    });
+    A.overlay(box, '<h2>CHICKEN SHOWDOWN</h2><p>Face <b>Cluck Norris</b> in a quick-draw duel. Wait for <b style="color:#ff5470">DRAW!</b>, then press Space or tap. Fire early and you lose. Every duel Cluck gets faster.</p>', [{ label: '▶ DUEL', fn: start }]);
+  }
+
+  /* ===================== COW BEAM ===================== */
+  function cow() {
+    const H = 540, GY = 470, bar = A.el('div', 'gbar'); box.appendChild(bar);
+    const C = A.canvas(box, W, H), ctx = C.ctx, P = C.p;
+    let ufo, cows, farmers, forks, score, lives, energy, state = 'menu', pops, beam = false, hurtT = 0, locked = false;
+    function start() {
+      ufo = { x: W / 2, y: 110 }; cows = []; farmers = []; forks = []; score = 0; lives = 3; energy = 100; pops = []; hurtT = 0; locked = false;
+      for (let i = 0; i < 4; i++) cows.push(mkCow()); farmers.push(mkFarmer()); state = 'play';
+    }
+    const mkCow = () => ({ x: A.rand(40, W - 40), vx: A.rand(-50, 50), lift: 0, dir: 1 });
+    const mkFarmer = () => ({ x: A.rand(40, W - 40), vx: A.rand(-60, 60) || 40, t: A.rand(1.5, 3.5) });
+    function over() {
+      state = 'end'; const r = A.best('cow-beam', score);
+      A.overlay(box, '<h2>THE FARMERS WIN</h2><p>Cows abducted: <b>' + score + '</b> • Best <b>' + r.best + '</b>' + (r.isNew ? ' 🏆' : '') + '</p><p>The cows have regrets about their new home.</p>', [{ label: '↻ AGAIN', fn: start }]);
+    }
+    A.loop(dt => {
+      if (state === 'play') {
+        const K = A.keys;
+        if (K.arrowleft || K.a) ufo.x -= 430 * dt; if (K.arrowright || K.d) ufo.x += 430 * dt;
+        if (P.down || P.touch === false && P.x !== W / 2) { if (P.down || true) ufo.x += (P.x - ufo.x) * Math.min(1, dt * 8); }
+        ufo.x = A.clamp(ufo.x, 40, W - 40);
+        const want = !!(P.down || K[' ']);
+        if (energy <= 0) locked = true; if (energy >= 30) locked = false;
+        beam = want && !locked;
+        energy = A.clamp(energy + (beam ? -32 : 18) * dt, 0, 100);
+        const diff = Math.min(1.6, 1 + score * .03);
+        cows.forEach(c => {
+          const under = beam && Math.abs(c.x - ufo.x) < 46;
+          if (under) { c.lift = Math.min(1, c.lift + dt / 1.0); }
+          else c.lift = Math.max(0, c.lift - dt * 1.5);
+          if (c.lift === 0) { c.x += c.vx * dt; if (c.x < 30 || c.x > W - 30) c.vx *= -1; if (Math.random() < dt * .3) c.vx = A.rand(-55, 55); }
+          if (c.lift >= 1) { score++; A.beep(900, .3, 'sine', .08); pops.push({ x: c.x, y: ufo.y + 40, t: 'MOO!', life: .9 }); Object.assign(c, mkCow(), { x: A.rand(40, W - 40) }); }
+        });
+        const nf = Math.min(4, 1 + Math.floor(score / 6));
+        while (farmers.length < nf) farmers.push(mkFarmer());
+        farmers.forEach(f => {
+          f.x += f.vx * dt * diff; if (f.x < 30 || f.x > W - 30) f.vx *= -1;
+          f.t -= dt;
+          if (f.t <= 0) { f.t = A.rand(1.6, 3.4) / diff; const dx = ufo.x - f.x, dy = ufo.y - GY, d = Math.hypot(dx, dy); forks.push({ x: f.x, y: GY - 20, vx: dx / d * 330 * diff, vy: dy / d * 330 * diff }); A.beep(260, .08, 'square', .03); }
+        });
+        hurtT = Math.max(0, hurtT - dt);
+        forks.forEach(f => { f.x += f.vx * dt; f.y += f.vy * dt; if (hurtT <= 0 && Math.hypot(f.x - ufo.x, f.y - ufo.y) < 34) { f.dead = true; lives--; hurtT = 1.2; A.beep(110, .3, 'sawtooth', .08); if (lives <= 0) over(); } if (f.y < -20 || f.x < -20 || f.x > W + 20) f.dead = true; });
+        forks = forks.filter(f => !f.dead);
+        pops.forEach(p => { p.y -= 35 * dt; p.life -= dt; }); pops = pops.filter(p => p.life > 0);
+      }
+      const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#0b1030'); g.addColorStop(1, '#2a3a6a'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = '#fff'; for (let i = 0; i < 40; i++) ctx.fillRect((i * 97) % W, (i * 53) % 300, 2, 2);
+      ctx.fillStyle = '#2f6b3a'; ctx.fillRect(0, GY, W, H - GY);
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      if (ufo) {
+        if (beam) { const gr = ctx.createLinearGradient(0, ufo.y, 0, GY); gr.addColorStop(0, 'rgba(120,255,160,.55)'); gr.addColorStop(1, 'rgba(120,255,160,.15)'); ctx.fillStyle = gr; ctx.beginPath(); ctx.moveTo(ufo.x - 18, ufo.y + 20); ctx.lineTo(ufo.x + 18, ufo.y + 20); ctx.lineTo(ufo.x + 52, GY + 20); ctx.lineTo(ufo.x - 52, GY + 20); ctx.fill(); }
+        ctx.font = '40px serif';
+        cows.forEach(c => ctx.fillText('🐄', c.x, GY + 4 - c.lift * (GY - ufo.y - 30)));
+        farmers.forEach(f => ctx.fillText('🧑‍🌾', f.x, GY));
+        forks.forEach(f => ctx.fillText('🔱', f.x, f.y));
+        ctx.globalAlpha = hurtT > 0 && Math.floor(hurtT * 10) % 2 ? .3 : 1; ctx.font = '64px serif'; ctx.fillText('🛸', ufo.x, ufo.y); ctx.globalAlpha = 1;
+        ctx.font = 'bold 22px system-ui'; ctx.fillStyle = '#fff'; pops.forEach(p => { ctx.globalAlpha = Math.min(1, p.life * 2); ctx.fillText(p.t, p.x, p.y); }); ctx.globalAlpha = 1;
+        ctx.fillStyle = '#123'; ctx.fillRect(20, H - 22, 200, 10); ctx.fillStyle = locked ? '#ff5470' : '#4dff9a'; ctx.fillRect(20, H - 22, 2 * energy, 10);
+      }
+      bar.innerHTML = '<span>COWS <b>' + (score || 0) + '</b></span><span>LIVES <b>' + '❤'.repeat(Math.max(0, lives == null ? 3 : lives)) + '</b></span><span>BEST <b>' + A.getBest('cow-beam', 0) + '</b></span><span>Move mouse / arrows • hold click / Space = beam</span>';
+    });
+    A.overlay(box, '<h2>COW BEAM</h2><p>You are a UFO. Hold the tractor beam over a cow until it floats up. Farmers throw pitchforks. The beam drains energy (green bar). 3 lives.<br>Mouse/finger/arrows to move • hold click/touch/<b>Space</b> to beam.</p>', [{ label: '▶ ABDUCT', fn: start }]);
+  }
+
+  const map = { 'pigeon-mail': pigeon, 'toast-tower': toast, 'cat-chaos': cat, 'emoji-match': emoji, 'chicken-showdown': chicken, 'cow-beam': cow };
+  (map[id] || function () { box.textContent = 'Unknown game'; })();
+});
+
+</script>
+<script>
+(function(){
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  var id = Arcade.gameId;
+  var g = GAMES.filter(function(x){return x.id === id;})[0];
+  var box = document.getElementById('gamebox');
+  if (!g || !g.file) {
+    if (g && g.url) { location.replace(g.url); return; }
+    document.getElementById('pt').textContent = 'Game not found';
+    box.innerHTML = '<p style="padding:20px">That game does not exist. <a href="index.html">Back to all games</a></p>';
+    return;
+  }
+  document.title = g.title + ' – Free Browser Game | Echo Arcade';
+  document.querySelector('meta[name=description]').setAttribute('content', g.desc);
+  document.getElementById('pt').textContent = g.title;
+  document.getElementById('pe').textContent = g.emoji;
+  document.getElementById('ptag').textContent = g.tag;
+  document.getElementById('ppl').textContent = '👥 ' + g.players;
+  var li = function(a){return a.map(function(s){return '<li>'+s+'</li>';}).join('');};
+  document.getElementById('info').innerHTML =
+    '<h2>About ' + g.title + '</h2><p>' + g.desc + '</p>' +
+    '<h3>How to play</h3><ul>' + li(g.how) + '</ul>' +
+    '<h3>Tips</h3><ul>' + li(g.tips) + '</ul>' +
+    '<p class="small">Your progress and best scores are stored only in this browser.</p>';
+  var more = document.getElementById('more');
+  GAMES.filter(function(x){return x.id !== id;}).sort(function(){return Math.random()-.5;}).slice(0,6).forEach(function(x){
+    var a = document.createElement('a'); a.className = 'card';
+    a.href = x.url ? x.url : 'play.html?g=' + x.id;
+    a.innerHTML = '<div class="em">'+x.emoji+'</div><div class="meta">'+x.tag+'</div><h3>'+x.title+'</h3><p>'+x.desc+'</p>';
+    more.appendChild(a);
+  });
+  var m = document.getElementById('mute');
+  var paint = function(){ m.textContent = Arcade.muted ? '🔇' : '🔊'; };
+  paint();
+  m.onclick = function(e){ e.preventDefault(); Arcade.muted = !Arcade.muted; Arcade.store.set('muted', Arcade.muted); paint(); };
+  var fn = Arcade.games[g.file];
+  if (fn) fn(box, Arcade); else box.innerHTML = '<p style="padding:20px">Game code missing.</p>';
+})();
+</script>
+</body>
+</html>

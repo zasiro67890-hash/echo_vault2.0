@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Echo Arcade – 15 Free Browser Games (Shooters, Mystery, Factory, Daily Puzzle)</title>
+<meta name="description" content="Echo Arcade is a free collection of 15 original browser games: 2D shooters with bots, a summoning battler, a 15-chapter detective mystery, a factory game, a daily puzzle and funny mini games. No download.">
+<style>:root{--bg:#070a14;--panel:#0e1426;--panel2:#141c34;--line:#1f2d52;--cyan:#4de3ff;--gold:#ffd04d;--red:#ff5470;--green:#4dff9a;--pink:#ff7ad9;--text:#d6e6f2;--muted:#8097ab}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55}
+a{color:var(--cyan)}
+.top{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-bottom:1px solid var(--line);background:var(--panel);flex-wrap:wrap;gap:8px}
+.logo{font-weight:800;letter-spacing:4px;color:var(--text);text-decoration:none;font-size:1.25rem}
+.logo span{color:var(--cyan)}
+nav a{margin-left:16px;text-decoration:none;color:var(--muted)}
+nav a:hover{color:var(--cyan)}
+main{max-width:1040px;margin:0 auto;padding:16px}
+footer{text-align:center;color:var(--muted);padding:24px 12px;font-size:.9rem}
+.hero{text-align:center;padding:26px 8px 8px}
+.hero h1{margin:0;font-size:clamp(1.8rem,5vw,2.8rem);letter-spacing:3px}
+.hero h1 span{color:var(--cyan);text-shadow:0 0 18px var(--cyan)}
+.hero p{color:var(--muted);max-width:640px;margin:8px auto}
+.chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+.chip{background:var(--panel);border:1px solid var(--line);color:var(--muted);padding:6px 14px;border-radius:99px;cursor:pointer;font:inherit;font-size:.85rem}
+.chip.on,.chip:hover{color:#001018;background:var(--cyan);border-color:var(--cyan)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin-top:8px}
+.card{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;text-decoration:none;color:var(--text);transition:.15s;position:relative;overflow:hidden}
+.card:hover{transform:translateY(-3px);border-color:var(--cyan);box-shadow:0 6px 28px rgba(77,227,255,.15)}
+.card .em{font-size:2.4rem;line-height:1}
+.card h3{margin:8px 0 2px;font-size:1.05rem}
+.card .meta{font-size:.72rem;color:var(--gold);letter-spacing:1px;text-transform:uppercase}
+.card p{font-size:.88rem;color:var(--muted);margin:6px 0 0;flex:1}
+.card .pl{font-size:.75rem;color:var(--cyan);margin-top:8px}
+.card .new{position:absolute;top:10px;right:10px;background:var(--red);color:#fff;font-size:.65rem;padding:2px 8px;border-radius:99px;font-weight:700}
+.featured{border:1px solid var(--gold);background:linear-gradient(135deg,#1a1630,#0e1426);border-radius:14px;padding:18px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.featured .em{font-size:3rem}
+.featured h2{margin:0}
+.featured p{margin:4px 0;color:var(--muted)}
+.btn{background:var(--panel2);color:var(--cyan);border:1px solid #2a4a7a;border-radius:9px;padding:8px 16px;font:inherit;cursor:pointer;text-decoration:none;display:inline-block}
+.btn:hover:not(:disabled){background:#1c2a4e}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.big{background:var(--cyan);color:#001018;border:0;padding:12px 30px;font-weight:800;letter-spacing:1.5px}
+.btn.big:hover{filter:brightness(1.15)}
+.btn.gold{background:var(--gold);color:#201600;border:0;font-weight:700}
+.adslot{min-height:10px;margin:18px 0;text-align:center}
+.content{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:6px 22px 18px;margin-top:18px}
+.content h2{color:var(--cyan)}
+.content h3{color:var(--gold);margin-bottom:2px}
+.page{max-width:760px;margin:0 auto;padding:20px}
+.page h1{color:var(--cyan)}
+.ptitle{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:6px 0 10px}
+.ptitle h1{margin:0;font-size:1.5rem}
+.tagpill{background:var(--panel2);border:1px solid var(--line);color:var(--gold);font-size:.7rem;padding:3px 10px;border-radius:99px;letter-spacing:1px;text-transform:uppercase}
+.gamebox{position:relative;background:#05070d;border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 0 40px rgba(77,227,255,.1);min-height:200px}
+.gcanvas{display:block;width:100%;height:auto;touch-action:none;background:#05070d}
+.gbar{display:flex;gap:10px 20px;flex-wrap:wrap;justify-content:center;padding:8px 10px;background:var(--panel);font-size:.85rem;color:var(--muted);border-bottom:1px solid var(--line)}
+.gbar b{color:var(--cyan)}
+.ov{position:absolute;inset:0;background:rgba(5,7,13,.9);display:flex;align-items:center;justify-content:center;text-align:center;padding:18px;z-index:5;overflow:auto}
+.ovin{max-width:560px}
+.ovin h2{margin:0 0 6px;color:var(--cyan);letter-spacing:3px}
+.ovin p{margin:6px 0}
+.ovbtns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.cards{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px;background:var(--panel)}
+.cards .btn{min-width:84px;text-align:center;line-height:1.2;font-size:.8rem;padding:8px 6px}
+.cards .btn.sel{border-color:var(--gold);color:var(--gold)}
+.cards .btn .e{font-size:1.5rem;display:block}
+.padrow{display:flex;gap:10px;justify-content:center;padding:10px;background:var(--panel);flex-wrap:wrap}
+.pbtn{width:78px;height:62px;font-size:1.3rem;border-radius:12px;background:var(--panel2);color:var(--cyan);border:1px solid #2a4a7a;cursor:pointer;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+.pbtn:active{background:var(--cyan);color:#001018}
+.pbtn.p2{color:var(--pink);border-color:#7a2a62}
+.pbtn.p2:active{background:var(--pink);color:#001018}
+.dom{padding:16px;max-width:760px;margin:0 auto}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;margin:10px 0}
+/* detective */
+.dtop{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.dots{display:flex;gap:4px;flex-wrap:wrap}
+.dot{width:16px;height:16px;border-radius:50%;background:var(--panel2);border:1px solid var(--line)}
+.dot.ok{background:var(--green)}.dot.bad{background:var(--red)}.dot.now{border-color:var(--gold);box-shadow:0 0 8px var(--gold)}
+.story{font-size:1.05rem;line-height:1.7;font-family:Georgia,serif}
+.story h2{font-family:system-ui;color:var(--gold);margin:0 0 6px}
+.opt{display:block;width:100%;text-align:left;margin:8px 0;padding:12px 14px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;color:var(--text);font:inherit;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--cyan)}
+.opt.right{border-color:var(--green);background:#0d2a1d}
+.opt.wrong{border-color:var(--red);background:#2a0f17}
+.twist{border-left:4px solid var(--pink);padding:8px 14px;background:#1b1230;border-radius:0 10px 10px 0;margin-top:12px}
+.twist b{color:var(--pink);letter-spacing:2px;font-size:.8rem}
+.notebook{font-size:.9rem;color:var(--muted)}
+.notebook li{margin:4px 0}
+/* factory */
+.ftabs{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.ftab{background:var(--panel2);border:1px solid var(--line);color:var(--muted);padding:6px 12px;border-radius:8px;cursor:pointer;font:inherit;font-size:.85rem}
+.ftab.on{border-color:var(--gold);color:var(--gold)}
+.inv{display:flex;flex-wrap:wrap;gap:6px}
+.inv span{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:3px 9px;font-size:.8rem}
+.inv span.zero{opacity:.35}
+.frow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid var(--line)}
+.frow .nm{min-width:150px;font-weight:600}
+.frow .info{color:var(--muted);font-size:.8rem;flex:1;min-width:160px}
+.prog{height:6px;background:var(--panel2);border-radius:4px;overflow:hidden;width:100%}
+.prog i{display:block;height:100%;background:var(--cyan);width:0}
+.small{font-size:.8rem;color:var(--muted)}
+/* cipher */
+.board{display:grid;gap:6px;margin:10px auto;max-width:360px}
+.crow{display:flex;gap:8px;align-items:center;justify-content:center}
+.slot{width:46px;height:46px;border-radius:50%;background:var(--panel2);border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:1.6rem}
+.slot.cur{border-color:var(--cyan)}
+.pegs{display:grid;grid-template-columns:repeat(2,14px);gap:3px;margin-left:8px}
+.peg{width:14px;height:14px;border-radius:50%;background:var(--panel2);border:1px solid var(--line)}
+.peg.b{background:#fff}.peg.w{background:#888}
+.pal{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:10px 0}
+.pal .btn{font-size:1.4rem;padding:6px 12px}
+@media(max-width:560px){.slot{width:40px;height:40px;font-size:1.3rem}.frow .nm{min-width:100%}}
+.demo{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:12px;box-shadow:0 0 40px rgba(77,227,255,.12);margin-top:12px;background:#080c18}
+.demowrap{position:relative}
+.demowrap .btn{position:absolute;left:50%;bottom:14px;transform:translateX(-50%)}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.card .em{display:inline-block;animation:bob 3s ease-in-out infinite}
+.card:nth-child(2n) .em{animation-delay:.6s}.card:nth-child(3n) .em{animation-delay:1.3s}
+.card .go{margin-top:10px;color:#001018;background:var(--cyan);border-radius:8px;text-align:center;font-weight:800;padding:6px;font-size:.85rem}
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6319811906363452" crossorigin="anonymous"></script>
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">ECHO<span>ARCADE</span></a>
+  <nav><a href="index.html">Games</a><a href="about.html">About</a><a href="privacy.html">Privacy</a><a href="contact.html">Contact</a></nav>
+</header>
+<main>
+  <section class="hero">
+    <h1>ECHO <span>ARCADE</span></h1>
+    <p><b id="count">15</b> original games in one place. Free, instant, no download. Watch two bots fight below, then jump into any game.</p>
+  </section>
+  <div class="demowrap">
+    <canvas id="demo" class="demo" width="960" height="320"></canvas>
+    <a class="btn big" href="play.html?g=bot-arena">▶ PLAY BOT ARENA</a>
+  </div>
+
+  <section class="featured">
+    <div class="em">📅</div>
+    <div style="flex:1;min-width:220px">
+      <h2>Daily Cipher</h2>
+      <p>One secret code a day, the same for everyone. Crack it in 8 tries and keep your streak alive. <span id="streak"></span></p>
+    </div>
+    <a class="btn gold" href="play.html?g=daily-cipher">Play today's cipher</a>
+  </section>
+
+  <div class="chips" id="chips"></div>
+  <section class="grid" id="grid"></section>
+
+  <div class="adslot"></div>
+
+  <section class="content">
+    <h2>About Echo Arcade</h2>
+    <p>Echo Arcade is a free, ad-supported collection of original browser games. Every game is written from scratch in plain HTML5 Canvas and JavaScript, runs on desktop and mobile, and never needs an install or an account.</p>
+    <h3>What is inside</h3>
+    <ul>
+      <li><b>Shooters:</b> Bot Arena (you vs. waves of bots) and Squad Clash (4 vs 4 team rounds).</li>
+      <li><b>Strategy:</b> Summon Siege, a lane-based summoning battle.</li>
+      <li><b>Story:</b> The Impossible Detective, a 15-chapter locked-room murder mystery with a twist in every chapter.</li>
+      <li><b>Factory:</b> Deep Forge, a five-layer mining and crafting factory.</li>
+      <li><b>Daily:</b> Daily Cipher, a code-breaking puzzle that changes every day.</li>
+      <li><b>Fighting:</b> Button Brawl, where the player who presses the most different buttons wins.</li>
+      <li><b>Funny mini games:</b> pigeons, toast, cats, cows, chickens and emoji.</li>
+    </ul>
+    <p>Your progress and best scores are saved in your own browser (local storage). See the <a href="privacy.html">privacy policy</a> for details.</p>
+  </section>
+</main>
+<footer>
+  <p>© <span id="yr"></span> Echo Arcade • <a href="about.html">About</a> • <a href="privacy.html">Privacy Policy</a> • <a href="contact.html">Contact</a></p>
+</footer>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<script>window.GAMES = [
+  {
+    id: 'echo-vault', url: 'echo-vault.html', title: 'Echo Vault', emoji: '🔊', tag: 'Stealth', players: '1 player',
+    desc: 'The maze is invisible. Ping with sonar to see the walls, but guards hear every ping.',
+    how: ['Move with arrow keys or WASD.', 'Press Space to send a sonar ping.', 'Collect every shard, then reach the exit.'],
+    tips: ['Move away from your ping spot right after pinging.']
+  },
+  {
+    id: 'bot-arena', file: 'g-shooter.js', title: 'Bot Arena', emoji: '🎯', tag: 'Shooter', players: '1 player vs bots',
+    desc: 'A top-down 2D arena shooter. You against endless waves of smarter and faster bots.',
+    how: ['Move with WASD or arrow keys and aim with the mouse.', 'Hold the mouse button (or Space) to shoot.', 'On a phone, touch and hold: you move toward your finger and auto-aim at the nearest bot.', 'Grab hearts to heal and lightning bolts for rapid fire.'],
+    tips: ['Use the blocks as cover; bots cannot shoot through them.', 'Keep moving sideways. Standing still gets you killed.', 'Each wave heals you a little, so finish waves quickly.']
+  },
+  {
+    id: 'squad-clash', file: 'g-shooter.js', title: 'Squad Clash 4v4', emoji: '🪖', tag: 'Shooter', players: '4 vs 4 (you + 3 bot allies)',
+    desc: 'Team shooter, 4 on 4. You and three bot teammates face four enemy bots. First team to win 3 rounds takes the match.',
+    how: ['Move with WASD or arrow keys and aim with the mouse.', 'Hold the mouse button (or Space) to shoot.', 'A round ends when one whole team is eliminated.', 'Pick Easy, Normal or Hard before the match starts.'],
+    tips: ['Stay close to your teammates so you can focus fire.', 'If you go down, your allies keep fighting for the round.']
+  },
+  {
+    id: 'summon-siege', file: 'g-summoner.js', title: 'Summon Siege', emoji: '🧙', tag: 'Strategy', players: '1 player',
+    desc: 'A 2D summoning battle. Spend mana to call monsters into three lanes and smash the enemy castle.',
+    how: ['Mana refills over time. Click a card (or press 1-5) to summon a creature.', 'Choose a lane by clicking it or with the up/down arrow keys.', 'Lightning (card 6) lets you click anywhere to strike enemies.', 'Destroy the enemy castle to clear the stage. Each stage is harder.'],
+    tips: ['Melee units (Imp, Golem) cannot hit Dragons. Bring Archers or Mages.', 'Golems in front, Archers behind is a classic combo.', 'Do not waste mana; save up for a Dragon when you are safe.']
+  },
+  {
+    id: 'glitch-protocol', file: 'g-glitch.js', title: 'Glitch Protocol', emoji: '🌀', tag: 'Arcade', players: '1 player',
+    desc: 'Every 9 seconds the rules of the game mutate: inverted controls, ice floors, lying colors, darkness, spinning worlds and more.',
+    how: ['Move with WASD or arrows, or hold the mouse/finger to move toward it.', 'Collect green orbs, avoid red orbs.', 'Read the banner. Each glitch changes how everything works.', 'You have 3 lives.'],
+    tips: ['When the banner says COLORS LIE, red orbs are the good ones!', 'In Gravity mode, tap up to flap upward.']
+  },
+  {
+    id: 'daily-cipher', file: 'g-daily.js', title: 'Daily Cipher', emoji: '📅', tag: 'Daily', players: '1 player',
+    desc: 'One secret code per day, the same for everyone. Crack it in 8 tries, build a streak and share your result.',
+    how: ['Pick 4 colors to make a guess, then press Submit.', '⚫ means right color in the right place. ⚪ means right color, wrong place.', 'Colors can repeat in the secret code.', 'A new code unlocks every day at midnight your time.'],
+    tips: ['Use your first guesses to learn which colors exist.', 'Practice mode lets you play extra random codes.']
+  },
+  {
+    id: 'impossible-detective', file: 'g-detective.js', title: 'The Impossible Detective', emoji: '🕵️', tag: 'Story', players: '1 player',
+    desc: 'A 15-chapter murder mystery inside a locked vault. Every chapter ends with a deduction and a twist you will not see coming.',
+    how: ['Read each chapter carefully. The clues are all in the text.', 'Choose the best deduction at the end of every chapter.', 'Wrong answers do not stop the story, but they cost you Insight.', 'In chapter 15 you must name the culprit.'],
+    tips: ['Re-read the notebook (top right) before the final accusation.', 'If something does not fit, it is probably the point.']
+  },
+  {
+    id: 'deep-forge', file: 'g-factory.js', title: 'Deep Forge', emoji: '🏭', tag: 'Factory', players: '1 player',
+    desc: 'A big, tedious, wonderful factory game. Mine five layers deep, smelt ores, craft parts and build the Quantum Engine.',
+    how: ['Click Mine buttons to dig, then buy miners to dig for you.', 'Smelters and fabricators turn ore into ingots and parts automatically.', 'Unlock the next layer by paying its cost. There are 5 layers.', 'Build 3 Quantum Engines to complete the forge. Progress saves automatically.'],
+    tips: ['Coal is needed everywhere. Never let it run out.', 'Buy a machine for each recipe, then scale up the bottleneck.']
+  },
+  {
+    id: 'button-brawl', file: 'g-punch.js', title: 'Button Brawl', emoji: '🥊', tag: 'Fighting', players: '1 vs bot or 2 local',
+    desc: 'Mash different buttons to win. Chain different punches to build a combo, press two keys at once for a Super Punch.',
+    how: ['Player 1 uses A S D F. Player 2 uses J K L ;', 'Each key is a different punch. Alternating keys builds your combo.', 'Pressing the same key twice in a row breaks the combo.', 'Press two keys at the same instant for a 2.5x Super Punch.', 'On a phone, tap the on-screen buttons to fight the bot.'],
+    tips: ['Roll across all four keys instead of spamming one.', 'Hard bots chain Super Punches. Stay on your combo!']
+  },
+  {
+    id: 'pigeon-mail', file: 'g-mini.js', title: 'Pigeon Mail', emoji: '🐦', tag: 'Funny', players: '1 player',
+    desc: 'You are a very confident, very chubby pigeon delivering mail between chimneys.',
+    how: ['Tap, click or press Space to flap.', 'Fly through the gaps between chimneys.', 'Grab envelopes for bonus points.'],
+    tips: ['Small, rhythmic taps beat panic flapping.']
+  },
+  {
+    id: 'toast-tower', file: 'g-mini.js', title: 'Toast Tower', emoji: '🍞', tag: 'Funny', players: '1 player',
+    desc: 'Stack slices of toast into the tallest breakfast skyscraper the world has ever seen.',
+    how: ['A slice slides left and right. Tap, click or press Space to drop it.', 'Only the overlapping part stays. Perfect drops keep your width.', 'How high can you go?'],
+    tips: ['Watch the slice speed up. Drop on the beat.']
+  },
+  {
+    id: 'cat-chaos', file: 'g-mini.js', title: 'Cat Chaos', emoji: '🐱', tag: 'Funny', players: '1 player',
+    desc: 'Knock everything off the shelves. But only when the owner is not looking.',
+    how: ['Click or tap objects to knock them off the shelf.', 'When the owner shows ❗ get ready, when they show 👀 STOP.', 'Get caught 3 times and the game is over. You have 60 seconds.'],
+    tips: ['The warning gives you a short window to sneak in one last swat.']
+  },
+  {
+    id: 'emoji-match', file: 'g-mini.js', title: 'Emoji Mix-Up', emoji: '🧠', tag: 'Puzzle', players: '1 player',
+    desc: 'A memory game full of ridiculous emoji. Match all the pairs in the fewest moves.',
+    how: ['Click two cards to flip them.', 'Matching pairs stay open.', 'Finish with the fewest moves and the best time.'],
+    tips: ['Work in one corner of the board at a time.']
+  },
+  {
+    id: 'chicken-showdown', file: 'g-mini.js', title: 'Chicken Showdown', emoji: '🐔', tag: 'Funny', players: '1 player vs bot',
+    desc: 'A quick-draw duel against Cluck Norris. Wait for DRAW, then fire. Too early and you lose.',
+    how: ['Wait until the screen says DRAW!', 'Then press Space or tap as fast as you can.', 'Fire early and you lose the duel. Each round Cluck gets faster.'],
+    tips: ['Do not anticipate. React.']
+  },
+  {
+    id: 'cow-beam', file: 'g-mini.js', title: 'Cow Beam', emoji: '🛸', tag: 'Funny', players: '1 player',
+    desc: 'Be a UFO. Abduct cows with your tractor beam while angry farmers throw pitchforks.',
+    how: ['Move the UFO with the mouse, finger or arrow keys.', 'Hold click, touch or Space to fire the beam.', 'Keep the beam on a cow until it floats up.', 'The beam uses energy. Dodge pitchforks. You have 3 lives.'],
+    tips: ['Let the beam recharge when farmers are throwing.']
+  }
+];
+</script>
+<script>(function () {
+  const grid = document.getElementById('grid');
+  const chips = document.getElementById('chips');
+  const games = window.GAMES;
+  const tags = ['All'].concat([...new Set(games.map(g => g.tag))]);
+  let cur = 'All';
+
+  function href(g) { return g.url ? g.url : 'play.html?g=' + g.id; }
+
+  function render() {
+    grid.innerHTML = '';
+    games.filter(g => cur === 'All' || g.tag === cur).forEach(g => {
+      const a = document.createElement('a');
+      a.className = 'card';
+      a.href = href(g);
+      a.innerHTML = (g.tag === 'Daily' ? '<span class="new">DAILY</span>' : '') +
+        '<div class="em">' + g.emoji + '</div><div class="meta">' + g.tag + '</div><h3>' + g.title + '</h3><p>' + g.desc +
+        '</p><div class="pl">👥 ' + g.players + '</div><div class="go">▶ PLAY</div>';
+      grid.appendChild(a);
+    });
+  }
+
+  tags.forEach(t => {
+    const b = document.createElement('button');
+    b.className = 'chip' + (t === cur ? ' on' : '');
+    b.textContent = t;
+    b.onclick = () => { cur = t; [...chips.children].forEach(c => c.classList.toggle('on', c.textContent === t)); render(); };
+    chips.appendChild(b);
+  });
+  render();
+
+  try {
+    const st = JSON.parse(localStorage.getItem('arc_cipher_stats') || 'null');
+    if (st) document.getElementById('streak').textContent = '🔥 Your streak: ' + st.streak + ' day' + (st.streak === 1 ? '' : 's');
+  } catch (e) {}
+  document.getElementById('count').textContent = games.length;
+})();
+</script>
+<script>(function () {
+  var cv = document.getElementById('demo'); if (!cv) return;
+  var ctx = cv.getContext('2d'), W = 960, H = 320;
+  var obst = [[430, 110, 100, 100], [170, 40, 60, 60], [730, 220, 60, 60], [170, 230, 60, 60], [730, 40, 60, 60], [300, 140, 40, 40], [620, 140, 40, 40]];
+  var bots, bullets = [], parts = [], over = 0, msg = '', score = [0, 0];
+  function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+  function inObst(x, y) { for (var i = 0; i < obst.length; i++) { var o = obst[i]; if (x > o[0] && x < o[0] + o[2] && y > o[1] && y < o[1] + o[3]) return true; } return false; }
+  function los(a, b) { var dx = b.x - a.x, dy = b.y - a.y, n = Math.ceil(Math.hypot(dx, dy) / 10); for (var i = 1; i < n; i++) if (inObst(a.x + dx * i / n, a.y + dy * i / n)) return false; return true; }
+  function mk(name, col, x, y, ang) { return { name: name, col: col, x: x, y: y, ang: ang, hp: 100, cd: Math.random() * .4, strafe: 1, stT: 1, kick: 0, kx: 0, ky: 0, chk: .6, cx: x, cy: y, flash: 0 }; }
+  function reset() { bots = [mk('ALPHA', '#4da3ff', 60, 160, 0), mk('BETA', '#ff5470', W - 60, 160, Math.PI)]; bullets = []; over = 0; msg = ''; }
+  function move(u, vx, vy, dt) {
+    u.x = clamp(u.x + vx * dt, 14, W - 14); u.y = clamp(u.y + vy * dt, 14, H - 14);
+    obst.forEach(function (o) {
+      var cx = clamp(u.x, o[0], o[0] + o[2]), cy = clamp(u.y, o[1], o[1] + o[3]), dx = u.x - cx, dy = u.y - cy, d = Math.hypot(dx, dy);
+      if (d < 14) { if (d === 0) u.y = o[1] - 14; else { u.x = cx + dx / d * 14; u.y = cy + dy / d * 14; } }
+    });
+  }
+  function ad(a, b) { var d = a - b; while (d > Math.PI) d -= 2 * Math.PI; while (d < -Math.PI) d += 2 * Math.PI; return d; }
+  function boom(x, y, c, n) { for (var i = 0; i < n; i++) { var a = Math.random() * 6.28, s = 40 + Math.random() * 200; parts.push({ x: x, y: y, vx: Math.cos(a) * s, vy: Math.sin(a) * s, l: .3 + Math.random() * .4, c: c }); } }
+  function ai(b, o, dt) {
+    var dx = o.x - b.x, dy = o.y - b.y, dist = Math.hypot(dx, dy), vis = los(b, o), want = Math.atan2(dy, dx), da = ad(want, b.ang);
+    b.ang += clamp(da, -5 * dt, 5 * dt);
+    b.stT -= dt; if (b.stT <= 0) { b.strafe *= -1; b.stT = .8 + Math.random() * 1.4; }
+    var fx = Math.cos(want), fy = Math.sin(want), mx = 0, my = 0, wm = true;
+    if (b.kick > 0) { b.kick -= dt; mx = b.kx; my = b.ky; wm = false; }
+    else { if (!vis || dist > 280) { mx = fx; my = fy; } else if (dist < 150) { mx = -fx * .8; my = -fy * .8; } if (vis) { mx += -fy * b.strafe * .8; my += fx * b.strafe * .8; } }
+    var l = Math.hypot(mx, my); if (l > 0) { mx /= l; my /= l; }
+    move(b, mx * 120, my * 120, dt);
+    b.chk -= dt; if (b.chk <= 0) { if (wm && l > 0 && Math.hypot(b.x - b.cx, b.y - b.cy) < 18) { var a = Math.random() * 6.28; b.kx = Math.cos(a); b.ky = Math.sin(a); b.kick = .6; } b.cx = b.x; b.cy = b.y; b.chk = .6; }
+    b.cd -= dt; b.flash = Math.max(0, b.flash - dt);
+    if (vis && dist < 520 && b.cd <= 0 && Math.abs(da) < .3) { var aa = b.ang + (Math.random() - .5) * .25; bullets.push({ x: b.x + Math.cos(b.ang) * 20, y: b.y + Math.sin(b.ang) * 20, vx: Math.cos(aa) * 440, vy: Math.sin(aa) * 440, from: b, life: 1.3 }); b.cd = .32 + Math.random() * .25; b.flash = .06; }
+  }
+  function step(dt) {
+    parts.forEach(function (p) { p.x += p.vx * dt; p.y += p.vy * dt; p.l -= dt; }); parts = parts.filter(function (p) { return p.l > 0; });
+    if (over > 0) { over -= dt; if (over <= 0) reset(); return; }
+    ai(bots[0], bots[1], dt); ai(bots[1], bots[0], dt);
+    for (var i = bullets.length - 1; i >= 0; i--) {
+      var b = bullets[i]; b.x += b.vx * dt; b.y += b.vy * dt; b.life -= dt; var dead = b.life <= 0 || b.x < 0 || b.x > W || b.y < 0 || b.y > H || inObst(b.x, b.y);
+      if (!dead) bots.forEach(function (u) { if (u !== b.from && Math.hypot(u.x - b.x, u.y - b.y) < 17) { u.hp -= 8; boom(b.x, b.y, '#fff', 4); dead = true; if (u.hp <= 0) { var w = u === bots[0] ? 1 : 0; score[w]++; boom(u.x, u.y, u.col, 30); msg = 'BOT ' + bots[w].name + ' WINS!'; over = 2; } } });
+      if (dead) bullets.splice(i, 1);
+    }
+  }
+  function draw() {
+    ctx.fillStyle = '#080c18'; ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = 'rgba(77,227,255,.06)'; for (var x = 0; x < W; x += 40) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); } for (var y = 0; y < H; y += 40) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+    obst.forEach(function (o) { ctx.fillStyle = '#16213f'; ctx.fillRect(o[0], o[1], o[2], o[3]); ctx.strokeStyle = '#2f4a85'; ctx.lineWidth = 2; ctx.strokeRect(o[0], o[1], o[2], o[3]); });
+    bots.forEach(function (u) {
+      if (u.hp <= 0) return;
+      ctx.save(); ctx.translate(u.x, u.y); ctx.rotate(u.ang); ctx.fillStyle = '#cfd8e8'; ctx.fillRect(6, -3, 20, 6); if (u.flash > 0) { ctx.fillStyle = '#ffd04d'; ctx.beginPath(); ctx.arc(30, 0, 6, 0, 7); ctx.fill(); } ctx.restore();
+      ctx.fillStyle = u.col; ctx.beginPath(); ctx.arc(u.x, u.y, 14, 0, 7); ctx.fill();
+      ctx.fillStyle = '#222'; ctx.fillRect(u.x - 16, u.y - 26, 32, 4); ctx.fillStyle = u.hp > 40 ? '#4dff9a' : '#ff5470'; ctx.fillRect(u.x - 16, u.y - 26, 32 * Math.max(0, u.hp / 100), 4);
+      ctx.fillStyle = '#fff'; ctx.font = 'bold 10px system-ui'; ctx.textAlign = 'center'; ctx.fillText(u.name, u.x, u.y - 31);
+    });
+    bullets.forEach(function (b) { ctx.fillStyle = b.from === bots[0] ? '#9fd0ff' : '#ff9aa9'; ctx.beginPath(); ctx.arc(b.x, b.y, 3, 0, 7); ctx.fill(); });
+    parts.forEach(function (p) { ctx.globalAlpha = clamp(p.l * 2.5, 0, 1); ctx.fillStyle = p.c; ctx.fillRect(p.x, p.y, 3, 3); }); ctx.globalAlpha = 1;
+    ctx.textAlign = 'center'; ctx.font = 'bold 18px system-ui'; ctx.fillStyle = '#9fd0ff'; ctx.fillText('BOT ALPHA  ' + score[0], 150, 24); ctx.fillStyle = '#ff9aa9'; ctx.fillText(score[1] + '  BOT BETA', W - 150, 24);
+    ctx.fillStyle = '#ffd04d'; ctx.fillText('● LIVE DEMO: bot vs bot', W / 2, 24);
+    if (over > 0) { ctx.font = 'bold 36px system-ui'; ctx.fillStyle = '#fff'; ctx.fillText(msg, W / 2, H / 2 + 10); }
+  }
+  reset();
+  var last = performance.now();
+  (function loop(t) { var dt = Math.min(.05, (t - last) / 1000); last = t; step(dt); draw(); requestAnimationFrame(loop); })(last);
+})();
+</script>
+</body>
+</html>
